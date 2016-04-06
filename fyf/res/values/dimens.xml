@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="titlebar_height">44.67dp</dimen>
+    <dimen name="txtsize_px_64">21.33sp</dimen>
+    <dimen name="txtsize_px_54">18sp</dimen>
+    <dimen name="txtsize_px_50">16.67sp</dimen>
+    <dimen name="txtsize_px_48">16sp</dimen>
+    <dimen name="txtsize_px_44">14.67sp</dimen>
+    <dimen name="txtsize_px_40">13.33sp</dimen>
+    <dimen name="txtsize_px_32">11sp</dimen>
+    <dimen name="txtsize_px_30">10sp</dimen>
+    
+    
+    <dimen name="space_px_138">46dp</dimen>
+    <dimen name="space_px_80">26.67dp</dimen>
+    <dimen name="space_px_70">23.33dp</dimen>
+    <dimen name="space_px_60">20dp</dimen>
+    <dimen name="space_px_50">16.67dp</dimen>
+    <dimen name="space_px_40">13.33dp</dimen>
+    <dimen name="space_px_36">12dp</dimen>
+    <dimen name="space_px_26">8.67dp</dimen>
+    <dimen name="space_px_2">1.1dp</dimen>
+
+</resources>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="226.34dp"
+    android:background="@drawable/bg_p02_item_bottom"
+    android:orientation="vertical" >
+
+    <ImageView
+        android:id="@+id/thumb"
+        android:layout_width="match_parent"
+        android:layout_height="135.33dp"
+        android:scaleType="fitXY"
+        android:padding="@dimen/space_px_2"
+        android:src="@drawable/example_20151101213451" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:paddingLeft="6dp" 
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="清明上河图"
+            android:lines="2"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/fee_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="积分：3000"
+            android:textColor="#ffb400"
+            android:textSize="12sp" />
+        
+         <TextView
+            android:id="@+id/exchange"
+            android:layout_width="87.33dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:text="立即兑换"
+            android:gravity="center"
+            android:background="@drawable/bg_btn_simple_00"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fyf="http://schemas.android.com/apk/res/com.company.fyf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_gray"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="找回密码" />
+
+    <com.company.fyf.widget.ClearInputView
+        android:id="@+id/psd"
+        style="@style/clear_input_view"
+        android:layout_marginTop="@dimen/space_px_50"
+        fyf:hint="请输入登录密码"
+        fyf:icon="@drawable/ic_comm_locker" 
+         fyf:type="2"/>
+
+    <com.company.fyf.widget.ClearInputView
+        android:id="@+id/confirmpsd"
+        style="@style/clear_input_view"
+        android:layout_marginTop="@dimen/space_px_50"
+        fyf:hint="确认登录密码"
+        fyf:icon="@drawable/ic_comm_locker" 
+         fyf:type="2"/>
+
+    <TextView
+        android:id="@+id/finish"
+         style="@style/simple_btn_00"
+        android:layout_marginTop="18.67dp"
+        android:text="完成"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

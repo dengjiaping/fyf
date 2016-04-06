@@ -1,0 +1,135 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.company.fyf"
+    android:versionCode="1"
+    android:versionName="1.0.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".FyfApp"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".ui.C05LoadingActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.C01CommWebActivity" />
+        <activity android:name=".ui.C06ImageActivity" />
+        <activity android:name=".ui.C07GuideActivity" />
+        <activity
+            android:name=".ui.M01MainActivity"
+            android:launchMode="singleTask" 
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.P01CommodityListActivity" />
+        <activity android:name=".ui.P02MyPointsIndexActivity" />
+        <activity android:name=".ui.P03MyPointsDetailActivity" />
+        <activity android:name=".ui.P04PointsManagerActivity" />
+        <activity android:name=".ui.P05ExchangeListActivity" />
+        <activity android:name=".ui.P06PointsRuleActivity" />
+        <activity android:name=".ui.F01DiffRecoveryDetailActivity" />
+        <activity android:name=".ui.L01RegisterFirstActivity" 
+            android:windowSoftInputMode="stateAlwaysVisible"/>
+        <activity android:name=".ui.L02RegisterSecondActivity" 
+            android:windowSoftInputMode="stateAlwaysVisible"/>
+        <activity android:name=".ui.L03LoginActivity" 
+            android:windowSoftInputMode="stateAlwaysVisible"
+            android:launchMode="singleTask"/>
+        <activity android:name=".ui.L04FindPsdFirstActivity"
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity android:name=".ui.L05FindPsdSecondActivity" 
+            android:windowSoftInputMode="stateAlwaysVisible"/>
+        <activity android:name=".ui.L06FindPsdThirdActivity" />
+        <activity android:name=".ui.S01MsgListActivity" />
+        <activity android:name=".ui.S02MsgDetailActivity" />
+        <activity android:name=".ui.T01SetupIndexActivity" />
+        <activity android:name=".ui.T02PersonalDetailActivity" 
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".ui.T03FeedBackActivity"
+            android:windowSoftInputMode="stateAlwaysVisible" />
+        <activity android:name=".ui.T04SorterDetailActivity" 
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name=".ui.T05AppIntroActivity" />
+        <activity android:name=".ui.N01ClassificationListActivity" />
+        <activity android:name=".ui.N02ClassificationDetailActivity" />
+        <activity
+            android:name=".ui.N03ClassificationAddActivity"
+            android:configChanges="keyboard|screenSize|orientation" 
+            android:windowSoftInputMode="stateAlwaysVisible"/>
+        <activity android:name=".ui.C06SweepActivity" 
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.C08QRCodeActivity" />
+        <receiver android:name="com.company.fyf.receiver.NetworkReceiver">  
+            <intent-filter>  
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>  
+            </intent-filter>  
+        </receiver>  
+
+        <!-- umeng start -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="564d3aa267e58e309b006a92" />
+        
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="fenyifen" />
+
+        <activity
+            android:name="com.umeng.socialize.view.ShareActivity"
+            android:configChanges="orientation|keyboard"
+            android:launchMode="singleTask"
+            android:noHistory="true"
+            android:theme="@style/Theme.UMDialog"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name="com.company.fyf.wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- 腾讯SSO授权的Activity注册 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1104983298" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- umeng end -->
+
+    </application>
+
+</manifest>

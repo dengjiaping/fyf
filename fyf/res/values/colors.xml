@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="theme_blue">#4dbb0f</color>
+    <color name="theme_gray">#f5f5f5</color>
+    <color name="theme_blue_deep">#007f1b</color>
+    <color name="theme_2c86c4">#2c86c4</color>
+    <color name="theme_ffa823">#ffa823</color>
+    <color name="theme_797979">#797979</color>
+    <color name="theme_eeeeee">#eeeeee</color>
+    <color name="theme_f31313">#f31313</color>
+    
+    <color name="theme_kitchen">#297d02</color>
+    <color name="theme_other">#f8b551</color>
+    <color name="theme_recyclable">#20c7f0</color>
+    
+</resources>

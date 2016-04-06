@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_gray"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="分类回收" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_kitchen"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:background="@null"
+            android:gravity="left"
+            android:paddingLeft="20dp"
+            android:text="@string/recovery_type_kitchen"
+            android:textColor="@drawable/co_comm_simle_01" >
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/rb_other"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:background="@null"
+            android:gravity="center"
+            android:text="@string/recovery_type_other"
+            android:textColor="@drawable/co_comm_simle_01" >
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/rb_recoverable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:background="@null"
+            android:gravity="right"
+            android:paddingRight="20dp"
+            android:text="@string/recovery_type_recoverable"
+            android:textColor="@drawable/co_comm_simle_01" >
+        </RadioButton>
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroupLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rb_kitchen_line"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_simple_02"
+            android:button="@null"
+            android:enabled="false" >
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/rb_other_line"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_simple_02"
+            android:button="@null"
+            android:enabled="false" >
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/rb_recoverable_line"
+            android:layout_width="0dp"
+            android:layout_height="1.5dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_simple_02"
+            android:button="@null"
+            android:enabled="false" >
+        </RadioButton>
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/white" />
+
+</LinearLayout>

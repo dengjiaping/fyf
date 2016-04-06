@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="设置" />
+
+    <View
+        style="@style/item_click_cutline_full"
+        android:layout_marginTop="@dimen/space_px_40" />
+
+    <LinearLayout
+        android:id="@+id/ll_show_personal_detail"
+        style="@style/item_click_linearlayout" >
+
+        <TextView
+            style="@style/item_click_textview"
+            android:text="个人资料" />
+
+        <ImageView style="@style/item_click_arrow" />
+    </LinearLayout>
+
+    <View style="@style/item_click_cutline_full" />
+
+    <View
+        style="@style/item_click_cutline_full"
+        android:layout_marginTop="@dimen/space_px_60" />
+
+    <LinearLayout
+        android:id="@+id/ll_show_app_intro"
+        style="@style/item_click_linearlayout" >
+
+        <TextView
+            style="@style/item_click_textview"
+            android:text="分一分介绍" />
+
+        <ImageView style="@style/item_click_arrow" />
+    </LinearLayout>
+
+    <View style="@style/item_click_cutline_right" />
+
+    <LinearLayout
+        android:id="@+id/ll_show_feedback"
+        style="@style/item_click_linearlayout" >
+
+        <TextView
+            style="@style/item_click_textview"
+            android:text="意见反馈" />
+
+        <ImageView style="@style/item_click_arrow" />
+    </LinearLayout>
+
+    <View style="@style/item_click_cutline_right" />
+
+    <LinearLayout 
+        android:id="@+id/ll_check_update"
+        style="@style/item_click_linearlayout" >
+
+        <TextView
+            style="@style/item_click_textview"
+            android:text="检查更新" />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="检查更新"
+            android:textColor="#797979"
+            android:textSize="15sp" />
+
+        <ImageView style="@style/item_click_arrow" />
+    </LinearLayout>
+
+    <View style="@style/item_click_cutline_right" />
+
+    <LinearLayout 
+        android:id="@+id/ll_tel"
+        style="@style/item_click_linearlayout" >
+
+        <TextView
+            android:id="@+id/tel"
+            style="@style/item_click_textview"
+            android:text="联系我们" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:text="010-87609497"
+            android:textColor="#797979"
+            android:textSize="15sp" />
+
+        <ImageView style="@style/item_click_arrow" />
+    </LinearLayout>
+
+    <View style="@style/item_click_cutline_full" />
+
+    <View
+        android:id="@+id/btn_logout_line_up"
+        style="@style/item_click_cutline_full"
+        android:layout_marginTop="@dimen/space_px_60" />
+
+    <TextView
+        android:id="@+id/btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="46.67dp"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/black"
+        android:textSize="@dimen/txtsize_px_48" />
+
+    <View 
+        android:id="@+id/btn_logout_line_down"
+        style="@style/item_click_cutline_full" />
+
+</LinearLayout>

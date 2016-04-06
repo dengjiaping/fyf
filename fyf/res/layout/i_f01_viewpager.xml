@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="165.33dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="17.33dp"
+            android:layout_marginRight="17.33dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/theme_blue"
+            android:scaleType="center"
+            android:src="@drawable/ic_f01_iv_kitchen" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="9.5dp"
+            android:text="厨余垃圾含有极高的水分与有机物，很容易腐坏，产生恶臭。经过妥善处理和加工，可转化为新的资源，高有机物含量的特点使其经过严格处理后可作为肥料、饲料，也可产生沼气用作燃料或发电，油脂部分则可用于制备生物燃料。厨余垃圾非法收集和回收利用会对环境和居民健康产生威胁。对厨余垃圾单独收集，可以减少进入填埋场的有机物的量，减少臭气和垃圾渗滤液的产生，也可以避免水分过多对垃圾焚烧处理造成的不利影响，降低了对设备的腐蚀。"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+</ScrollView>

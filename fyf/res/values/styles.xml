@@ -1,0 +1,126 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Light.NoTitleBar">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.        -->
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+    <style name="item_click_linearlayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">46.67dp</item>
+        <item name="android:background">@drawable/bg_simple_01</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="item_click_icon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/space_px_40</item>
+    </style>
+
+    <style name="item_click_textview">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/space_px_40</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/txtsize_px_48</item>
+    </style>
+
+    <style name="item_click_arrow">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/space_px_40</item>
+        <item name="android:src">@drawable/ic_comm_arrow</item>
+    </style>
+
+    <style name="item_click_cutline">
+        <item name="android:layout_width">57.33dp</item>
+        <item name="android:layout_height">@dimen/space_px_2</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    
+    <style name="item_click_cutline_full">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/space_px_2</item>
+        <item name="android:background">@color/theme_gray</item>
+    </style>
+    
+    <style name="item_click_cutline_right">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/space_px_2</item>
+        <item name="android:background">@color/theme_gray</item>
+        <item name="android:layout_marginLeft">@dimen/space_px_40</item>
+    </style>
+    
+    <style name="clear_input_view">
+        <!--android:layout_width="match_parent"
+		    android:layout_height="@dimen/space_px_138"
+		    android:layout_marginLeft="@dimen/space_px_60"
+		    android:layout_marginRight="@dimen/space_px_60"  -->
+        
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/space_px_138</item>
+        <item name="android:layout_marginLeft">@dimen/space_px_60</item>
+        <item name="android:layout_marginRight">@dimen/space_px_60</item>
+    </style>
+    
+    <style name="simple_btn_00">
+        
+        <!-- android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_marginLeft="@dimen/space_px_60"
+    android:layout_marginRight="@dimen/space_px_60"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:textColor="@color/white"
+    android:textSize="18sp"  -->
+    	<item name="android:layout_width">match_parent</item>
+    	<item name="android:layout_height">40dp</item>
+    	<item name="android:layout_marginLeft">@dimen/space_px_60</item>
+    	<item name="android:layout_marginRight">@dimen/space_px_60</item>
+    	<item name="android:gravity">center</item>
+    	<item name="android:textColor">@color/white</item>
+    	<item name="android:textSize">18sp</item>
+    	<item name="android:background">@drawable/bg_btn_simple_00</item>
+        
+    </style>
+    
+    <style name="simple_input_01">
+        <item name="android:layout_width">match_parent</item>
+    	<item name="android:layout_height">wrap_content</item>
+    	<item name="android:layout_marginLeft">@dimen/space_px_60</item>
+    	<item name="android:layout_marginRight">@dimen/space_px_60</item>
+    	<item name="android:paddingTop">15dp</item>
+    	<item name="android:paddingBottom">15dp</item>
+    	<item name="android:gravity">center_vertical</item>
+    	<item name="android:padding">6.67dp</item>
+    	<item name="android:textColor">@color/black</item>
+    	<item name="android:textSize">@dimen/txtsize_px_50</item>
+    	<item name="android:background">@drawable/bg_shape_input_simple_01</item>
+    </style>
+    
+    <style name="simple_text_01">
+        <item name="android:layout_width">match_parent</item>
+    	<item name="android:layout_height">wrap_content</item>
+    	<item name="android:layout_marginLeft">30dp</item>
+    	<item name="android:layout_marginRight">30dp</item>
+    	<item name="android:paddingTop">20.67dp</item>
+    	<item name="android:paddingBottom">20.67dp</item>
+    	<item name="android:textSize">@dimen/txtsize_px_50</item>
+    	<item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>

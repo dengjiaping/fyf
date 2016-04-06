@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="translete">#00000000</color>
+    <color name="translucent">#88000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_selected">#ededed</color>
+    <color name="black">#000000</color>
+    <color name="red">#CC0000</color>
+    <color name="lightgray">#BFBFBF</color>
+    <color name="gray">#808080</color>
+    <color name="deepgray">#404040</color>
+    <color name="lightblue">#6699FF</color>
+    <color name="blue">#3366CC</color>
+    <color name="deepblue">#003399</color>
+    <color name="lightgreen">#99CC33</color>
+    <color name="green">#00CC00</color>
+    <color name="deepgreen">#FF6600</color>
+    <color name="lightyellow">#FFCC00</color>
+    <color name="yellow">#FF9900</color>
+    <color name="deepyellow">#FF6600</color>
+    
+    <color name="bottom_bg">#F8F8F8</color>
+    <color name="btn_bg">#4c99f0</color>
+    <color name="bottom_content_select_bg">#00A0E0</color>
+    <color name="bottom_content_unselect_bg">#747474</color>
+    <color name="top_bg">#F36700</color>
+    
+    <color name="gray_01">#B2B2B2</color>
+    <color name="gray_02">#A0A0A0</color>
+    
+    
+    
+    
+</resources>

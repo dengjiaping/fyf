@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="意见反馈" />
+
+    <com.company.fyf.widget.CountEditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="26.67dp"
+        android:layout_marginRight="26.67dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_shape_input_simple_01"
+        android:gravity="top|left"
+        android:hint="您的宝贵意见是我们前进的动力"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="13.33dp"
+        android:textColor="#cecece" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="26.67dp"
+        android:layout_marginTop="13.33dp"
+        android:gravity="right"
+        android:textColor="#7a7a7a" />
+
+</LinearLayout>

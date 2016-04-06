@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="首页" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.company.fyf.widget.CrouselImage
+                android:id="@+id/crouselImage"
+                android:layout_width="match_parent"
+                android:layout_height="168.67dp"
+                android:background="#ffffff" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="153.33dp"
+                android:layout_marginTop="@dimen/space_px_26"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:id="@+id/ll_sweep"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_simple_01"
+                    android:gravity="bottom|center_horizontal"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_m02_iv_sweep" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="31.67dp"
+                        android:layout_marginTop="14.33dp"
+                        android:text="扫一扫"
+                        android:textColor="@color/theme_2c86c4"
+                        android:textSize="@dimen/txtsize_px_50" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="@dimen/space_px_2"
+                    android:layout_height="match_parent" />
+
+                <LinearLayout
+                    android:id="@+id/ll_commodity"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_simple_01"
+                    android:gravity="bottom|center_horizontal"
+                    android:orientation="vertical" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_m02_iv_commodity" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="31.67dp"
+                        android:layout_marginTop="14.33dp"
+                        android:text="积分兑换"
+                        android:textColor="@color/theme_ffa823"
+                        android:textSize="@dimen/txtsize_px_50" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="176.67dp"
+                android:layout_marginTop="@dimen/space_px_26"
+                android:background="@color/white"
+                android:orientation="horizontal" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+
+                    <View
+                        android:id="@+id/click_area_kitchen"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" 
+                        android:background="@drawable/bg_simple_01"/>
+
+                    <View
+                        android:id="@+id/click_area_other"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" 
+                        android:background="@drawable/bg_simple_01"/>
+
+                    <View
+                        android:id="@+id/click_area_recyclable"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" 
+                        android:background="@drawable/bg_simple_01"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/recycle_type_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_m02_iv_other" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toRightOf="@id/recycle_type_other" >
+
+                    <ImageView
+                        android:id="@+id/recycle_type_recyclable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_m02_iv_recyclable" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/recycle_type_other" >
+
+                    <ImageView
+                        android:id="@+id/ic_m02_iv_kitchen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_m02_iv_kitchen" />
+                </FrameLayout>
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

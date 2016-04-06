@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="个人资料" />
+
+    <LinearLayout
+        android:id="@+id/ll_area_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <EditText
+            android:id="@+id/edit_name"
+            style="@style/simple_input_01"
+            android:layout_marginTop="20dp"
+            android:hint="姓名" />
+
+        <TextView
+            android:id="@+id/edit_sex"
+            style="@style/simple_input_01"
+            android:layout_marginTop="13.33dp"
+            android:hint="性别" />
+
+        <TextView
+            android:id="@+id/edit_age"
+            style="@style/simple_input_01"
+            android:layout_marginTop="13.33dp"
+            android:hint="年龄" />
+
+        <EditText
+            android:id="@+id/edit_addr"
+            style="@style/simple_input_01"
+            android:layout_marginTop="13.33dp"
+            android:hint="家庭住址" />
+
+        <TextView
+            android:id="@+id/btn_finish"
+            style="@style/simple_btn_00"
+            android:layout_marginTop="66.67dp"
+            android:text="完成" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_area_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/view_name"
+            style="@style/simple_text_01"
+            android:layout_marginTop="10dp"
+            android:text="姓名:张三" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_px_2"
+            android:layout_marginLeft="13dp"
+            android:background="@color/theme_gray" />
+        
+        <TextView
+            android:id="@+id/view_sex"
+            style="@style/simple_text_01"
+            android:text="性别：男" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_px_2"
+            android:layout_marginLeft="13dp"
+            android:background="@color/theme_gray" />
+        
+        <TextView
+            android:id="@+id/view_age"
+            style="@style/simple_text_01"
+            android:text="年龄：23" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_px_2"
+            android:layout_marginLeft="13dp"
+            android:background="@color/theme_gray" />
+        
+        <TextView
+            android:id="@+id/view_addr"
+            style="@style/simple_text_01"
+            android:text="家庭住址：北京市朝阳区朝阳区朝阳区朝阳区朝阳区朝阳区朝阳区朝阳区" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_px_2"
+            android:layout_marginLeft="13dp"
+            android:background="@color/theme_gray" />
+        
+    </LinearLayout>
+
+</LinearLayout>

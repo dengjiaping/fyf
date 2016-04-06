@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_gray"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="找回密码" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/ic_l06_iv_success" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_px_70"
+        android:text="恭喜您，密码修改成功！"
+        android:textColor="#202020"
+        android:textSize="@dimen/txtsize_px_50" />
+
+    <TextView
+        android:id="@+id/login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46.67dp"
+        android:background="@drawable/bg_btn_simple_04"
+        android:gravity="center"
+        android:text="立即登录"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

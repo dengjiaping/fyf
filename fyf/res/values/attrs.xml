@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ClearInputView">
+        <attr name="hint" format="string" />
+        <attr name="icon" format="reference" />
+        <attr name="type" format="integer" />
+    </declare-styleable>
+
+</resources>

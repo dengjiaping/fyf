@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fyf="http://schemas.android.com/apk/res/com.company.fyf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_gray"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="找回密码" />
+
+    <com.company.fyf.widget.ClearInputView
+        android:id="@+id/username"
+        style="@style/clear_input_view"
+        android:layout_marginTop="19.33dp"
+        fyf:hint="请输入11位手机号"
+        fyf:icon="@drawable/ic_comm_phone" 
+        fyf:type="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19.33dp"
+        android:layout_marginLeft="@dimen/space_px_60"
+        android:layout_marginRight="@dimen/space_px_60"
+        android:orientation="horizontal"
+        android:gravity="center_vertical" >
+
+        <EditText
+            android:id="@+id/mobile_verify"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="46.67dp"
+            android:layout_marginRight="13.33dp"
+            android:background="@drawable/bg_shape_input_simple_01"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="5dp"
+            android:hint="请输入验证码" 
+            android:inputType="number"/>
+
+        <com.company.fyf.widget.CountDownText
+             android:id="@+id/countDownText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_btn_sms"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/nextStep"
+        style="@style/simple_btn_00"
+        android:layout_marginTop="23.33dp"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>

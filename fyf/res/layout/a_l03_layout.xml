@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fyf="http://schemas.android.com/apk/res/com.company.fyf"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/theme_gray"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="登录" />
+
+    <com.company.fyf.widget.ClearInputView
+        android:id="@+id/username"
+        style="@style/clear_input_view"
+        android:layout_marginTop="25dp"
+        fyf:hint="请输入11位手机号"
+        fyf:icon="@drawable/ic_comm_phone" 
+        fyf:type="1"/>
+
+    <com.company.fyf.widget.ClearInputView
+        android:id="@+id/psd"
+        style="@style/clear_input_view"
+        android:layout_marginTop="@dimen/space_px_50"
+        fyf:hint="请输入登录密码"
+        fyf:icon="@drawable/ic_comm_locker" 
+        fyf:type="2"/>
+
+    <TextView
+        android:id="@+id/login"
+        style="@style/simple_btn_00"
+        android:layout_marginTop="18.67dp"
+        android:text="登录"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/space_px_60"
+        android:layout_marginRight="@dimen/space_px_60"
+        android:layout_marginTop="@dimen/space_px_50" >
+
+        <TextView
+            android:id="@+id/findpsd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
+            android:paddingRight="3dp"
+            android:text="忘记密码?"
+            android:textColor="@color/theme_797979"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/rememberName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="6dp"
+            android:layout_gravity="right"
+            android:button="@drawable/ic_l03_remembername"
+            android:textColor="@color/black"
+            android:text="记住用户名" />
+    </FrameLayout>
+
+</LinearLayout>

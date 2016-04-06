@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="我的积分" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@color/theme_blue" >
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:foreground="@drawable/bg_p02_fl_total_points" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="27dp"
+                android:text="可用积分"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/credit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|bottom"
+                android:layout_marginBottom="27dp"
+                android:text="2345"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/pointsRule"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="108.66dp"
+            android:layout_marginRight="22dp"
+            android:src="@drawable/bg_p02_iv_points_rule" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:gravity="center_vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/space_px_40"
+            android:src="@drawable/bg_p02_iv_label" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="兑好货"
+            android:textColor="@color/black"
+            android:textSize="18.67dp" />
+    </LinearLayout>
+
+    <com.company.fyf.widget.empty.EmptyViewLayout
+        android:id="@+id/emptyViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/space_px_40"
+        android:layout_marginRight="@dimen/space_px_40"
+        android:layout_marginTop="12dp"
+        empty_view="3"
+        col_space = "13.33"
+        row_space = "13.33" />
+
+</LinearLayout>

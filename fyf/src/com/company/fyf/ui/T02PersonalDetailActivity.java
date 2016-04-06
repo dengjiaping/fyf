@@ -1,0 +1,186 @@
+package com.company.fyf.ui;
+
+
+import java.util.Calendar;
+
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TextView;
+
+import com.company.fyf.R;
+import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.model.UserInfo;
+import com.company.fyf.net.CallBack;
+import com.company.fyf.net.MemberServer;
+import com.company.fyf.notify.IMsg;
+import com.company.fyf.notify.KeyList;
+import com.company.fyf.utils.FyfUtils;
+import com.company.fyf.utils.Logger;
+import com.company.fyf.widget.DatePickerDialog;
+import com.company.fyf.widget.DatePickerDialog.OnDateSetListener;
+import com.company.fyf.widget.TitleBar;
+
+public class T02PersonalDetailActivity extends B01BaseActivity {
+	
+	public static final String PARAM_STRING_FROM = "param_string_from";
+	public static final String FROM_FINISH_DETAIL_RIGHT_NOW = "from_finish_detail_right_now";
+	
+	private TitleBar titleBar = null ;
+	private boolean isEditMode = false ;
+	private View ll_area_edit,ll_area_view ;
+	private TextView edit_name,edit_sex,edit_age,edit_addr,view_name,view_sex,view_age,view_addr ;
+	private View btn_finish ;
+	
+	private String from = "" ;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.a_t02_layout) ;
+		onGetIntentData() ;
+		titleBar = (TitleBar) findViewById(R.id.titlebar) ;
+		ll_area_edit = findViewById(R.id.ll_area_edit) ;
+		ll_area_view = findViewById(R.id.ll_area_view) ;
+		edit_name = (TextView) findViewById(R.id.edit_name) ;
+		edit_sex =  (TextView)findViewById(R.id.edit_sex) ;
+		edit_sex.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				showSexSelDlg() ;
+			}
+		});
+		edit_age=  (TextView)findViewById(R.id.edit_age) ;
+		edit_age.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				showTimeSelDlg() ;
+			}
+		});
+		edit_addr= (TextView) findViewById(R.id.edit_addr) ;
+		view_name=  (TextView)findViewById(R.id.view_name) ;
+		view_sex=  (TextView)findViewById(R.id.view_sex) ;
+		view_age=  (TextView)findViewById(R.id.view_age) ;
+		view_addr= (TextView) findViewById(R.id.view_addr) ;
+		btn_finish=  findViewById(R.id.btn_finish) ;
+		btn_finish.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				doFinish() ;
+			}
+		}) ;
+		initData() ;
+		initMode() ;
+		checkIsFromFinishDetailRightNow() ;
+		registerNotity(KeyList.KEY_USER_INFO_UPDATE) ;
+	}
+	
+	private void checkIsFromFinishDetailRightNow() {
+		// TODO Auto-generated method stub
+		if(FROM_FINISH_DETAIL_RIGHT_NOW.equals(from)){
+			titleBar.getRightView().performClick() ;
+		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unRegisterNotity(KeyList.KEY_USER_INFO_UPDATE) ;
+		hideSoftInput() ;
+	}
+	
+	@Override
+	public <T> void onRefresh(IMsg<T> msg) {
+		super.onRefresh(msg);
+		if(KeyList.KEY_USER_INFO_UPDATE.equals(msg.getKey())){
+			 initData() ;
+		}
+	}
+	
+	private void doFinish() {
+		// TODO Auto-generated method stub
+		new MemberServer(this).accountProfileEdit(FyfUtils.sexToId(edit_sex.getText().toString()), edit_age.getTag().toString(), "", edit_addr.getText().toString(), edit_name.getText().toString(),new CallBack<UserInfo>() {
+			public void onSuccess(UserInfo t) {
+				super.onSuccess(t);
+				outEdit() ;
+			}
+		}) ;
+	}
+
+	private void initData() {
+		UserInfo info = UserInfoDb.INSTANCE.get() ;
+		if(info == null){
+			return ;
+		}
+		//edit_name,edit_sex,,,,,, ;
+		edit_name.setText( info.getNickname()) ;
+		edit_sex.setText(FyfUtils.sexFromId(info.getSex()));
+		edit_age.setText(FyfUtils.ageFromBirthday(info.getBirthday()));
+		edit_age.setTag(info.getBirthday()) ;
+		edit_addr.setText(info.getAddress());
+		view_name.setText("姓名：" + info.getNickname());
+		view_sex.setText("性别："+FyfUtils.sexFromId(info.getSex()));
+		view_age.setText("年龄：" + FyfUtils.ageFromBirthday(info.getBirthday()));
+		view_addr.setText("家庭住址：" + info.getAddress());
+	}
+
+	private void initMode() {
+		
+		if(isEditMode){
+			titleBar.setMenuBtn("取消", new View.OnClickListener() {
+				public void onClick(View v) {
+					outEdit() ;
+				}
+			}) ;
+			ll_area_edit.setVisibility(View.VISIBLE) ;
+			ll_area_view.setVisibility(View.GONE) ;
+		}else{
+			titleBar.setMenuBtn("编辑", new View.OnClickListener() {
+				public void onClick(View v) {
+					enterEdit() ;
+				}
+			}) ;
+			ll_area_view.setVisibility(View.VISIBLE) ;
+			ll_area_edit.setVisibility(View.GONE) ;
+		}
+	}
+	
+	private void enterEdit(){
+		isEditMode = true ;
+		initMode() ;
+		edit_name.requestFocus() ;
+//		showSoftInput() ;
+	}
+	
+	private void outEdit(){
+		isEditMode = false ;
+		hideSoftInput() ;
+		initMode() ;
+	}
+	
+	private final void showTimeSelDlg(){
+		showTimeSelDlg(new OnDateSetListener() {
+			public void onDateSet(DatePicker view, int year, int monthOfYear,
+					int dayOfMonth) {
+				Calendar c =  Calendar.getInstance();
+				c.set(year, monthOfYear, dayOfMonth) ;
+				edit_age.setText(FyfUtils.ageFromBirthday(String.valueOf(c.getTimeInMillis())));
+				edit_age.setTag(c.getTimeInMillis()) ;
+				Logger.d("T02PersonalDetailActivity", "time = " + c.getTimeInMillis()) ;
+				edit_name.requestFocus() ;
+			}
+		}) ;
+	}
+	
+	private void showSexSelDlg(){
+		final String array[] = {"男","女"} ;
+		showRadioDlg(array, 0, new OnClickListener() {
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss() ;
+				edit_sex.setText(array[which]) ;
+			}
+		}) ;
+	}
+	
+
+}

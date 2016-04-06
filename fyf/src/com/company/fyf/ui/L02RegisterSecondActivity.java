@@ -1,0 +1,92 @@
+package com.company.fyf.ui;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.TextView;
+
+import com.company.fyf.R;
+import com.company.fyf.model.User;
+import com.company.fyf.model.UserInfo;
+import com.company.fyf.net.CallBack;
+import com.company.fyf.net.MemberServer;
+import com.company.fyf.utils.FyfUtils;
+import com.company.fyf.widget.CountDownText;
+import com.company.fyf.widget.CountDownText.OnClickListener;
+
+public class L02RegisterSecondActivity extends B01BaseActivity {
+	
+	public static final String PARAM_STRING_PHONE = "param_phone" ;
+	public static final String PARAM_STRING_PSD = "param_psd" ;
+	
+	private String phone = "" ;
+	private String psd = "" ;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.a_l02_layout) ;
+		onGetIntentData() ;
+		
+		final CountDownText countDownText = (CountDownText) findViewById(R.id.countDownText) ;
+		countDownText.setOnClickListener(new OnClickListener() {
+			public void onClick() {
+				MemberServer memberServer = new MemberServer(L02RegisterSecondActivity.this) ;
+				memberServer.sendCheckCode(phone, new CallBack<String>() {
+					@Override
+					public void onSuccess(String t) {
+						super.onSuccess(t);
+						showToast("验证码已发送") ;
+					}
+				}); 
+			}
+		});
+		
+		View register = findViewById(R.id.register) ;
+		register.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				TextView textView = (TextView) findViewById(R.id.mobile_verify) ;
+				
+				String mobile_verify = textView.getText().toString() ;
+				
+				if(FyfUtils.checkInputEmpty(mobile_verify)){
+					showToast("请输入验证码");
+					return ;
+				}
+				
+				MemberServer memberServer = new MemberServer(L02RegisterSecondActivity.this) ;
+				memberServer.register(phone, psd, mobile_verify, new CallBack<UserInfo>() {
+					@Override
+					public void onSuccess(UserInfo t) {
+						super.onSuccess(t);
+						MemberServer memberServer = new MemberServer(L02RegisterSecondActivity.this) ;
+						memberServer.login(phone, psd, new CallBack<User>() {
+							@Override
+							public void onSuccess(User user) {
+								// TODO Auto-generated method stub
+								super.onSuccess(user);
+								
+								Bundle param = new Bundle() ;
+								param.putInt(M01MainActivity.PARAM_INT_TABINDEX, M01MainActivity.TAB_INDEX_PERSONAL) ;
+								param.putInt(M03PersonalFragment.PARAM_INT_FROM, M03PersonalFragment.FROM_LOGIN) ;
+								showActivity(M01MainActivity.class,param,Intent.FLAG_ACTIVITY_NEW_TASK) ;
+								finish() ;
+							}
+							@Override
+							public void onBadNet() {
+								super.onBadNet();
+								finish() ;
+							}
+							@Override
+							public void onFail() {
+								super.onFail();
+								finish() ;
+							}
+						}) ;
+					}
+				});
+			}
+		});
+	}
+}

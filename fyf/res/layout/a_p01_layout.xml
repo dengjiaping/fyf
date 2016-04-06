@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#ffffff">
+    
+    <com.company.fyf.widget.TitleBar
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/titlebar_height"
+        title="积分兑换" />
+
+    <com.company.fyf.widget.empty.EmptyViewLayout
+        android:id="@+id/emptyViewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:padding="@dimen/space_px_40"
+        empty_view = "3"
+        col_num = "2"
+        col_space = "13.33"
+        row_space = "13.33" />
+
+</LinearLayout>
