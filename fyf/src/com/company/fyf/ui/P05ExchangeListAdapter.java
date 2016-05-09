@@ -1,11 +1,8 @@
 package com.company.fyf.ui;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -14,6 +11,8 @@ import android.widget.TextView;
 import com.company.fyf.R;
 import com.company.fyf.dao.CommodityVo;
 import com.lyx.utils.ImageLoaderUtils;
+
+import java.util.List;
 
 public class P05ExchangeListAdapter extends BaseAdapter {
 	
@@ -59,11 +58,6 @@ public class P05ExchangeListAdapter extends BaseAdapter {
 			holder.title = (TextView) convertView.findViewById(R.id.title) ;
 			holder.thumb = (ImageView) convertView.findViewById(R.id.thumb) ;
 			holder.exchange = convertView.findViewById(R.id.exchange) ;
-			holder.exchange.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					if(changeListener != null ) changeListener.onExChange(vo) ;
-				}
-			}) ;
 			convertView.setTag(holder);
 		}else{
 			holder = (ViewHolder) convertView.getTag() ;
@@ -72,11 +66,17 @@ public class P05ExchangeListAdapter extends BaseAdapter {
 		return convertView;
 	}
 	
-	private void setData(CommodityVo vo, ViewHolder holder) {
+	private void setData(final CommodityVo vo, ViewHolder holder) {
 		// TODO Auto-generated method stub
 		holder.title.setText(vo.getTitle());
 		holder.fee_credit.setText("积分：" + vo.getFee_credit());
 		ImageLoaderUtils.displayPicWithAutoStretch(vo.getThumb(), holder.thumb);
+
+		holder.exchange.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				if(changeListener != null ) changeListener.onExChange(vo) ;
+			}
+		}) ;
 	}
 
 	class ViewHolder{

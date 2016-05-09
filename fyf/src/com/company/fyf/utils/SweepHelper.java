@@ -1,9 +1,9 @@
 package com.company.fyf.utils;
 
-import java.lang.reflect.Field;
-
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Field;
 
 public class SweepHelper {
 	
@@ -54,7 +54,7 @@ public class SweepHelper {
 			Field field = fields[i] ;
 			try {
 				String value = (String) field.get(null) ;
-				if(value.equals(tag)){
+				if(value != null && value.equals(tag)){
 					return true ;
 				}
 			} catch (IllegalAccessException | IllegalArgumentException e) {
