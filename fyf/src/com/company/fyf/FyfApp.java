@@ -10,6 +10,7 @@ public class FyfApp extends Application {
 	
 	public static FyfApp INSTANCE = null ;
 
+
 	
 	@Override
 	public void onCreate() {
