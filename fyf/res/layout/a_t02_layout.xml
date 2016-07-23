@@ -36,6 +36,18 @@
             android:layout_marginTop="13.33dp"
             android:hint="年龄" />
 
+        <TextView
+            android:id="@+id/edit_region"
+            style="@style/simple_input_01"
+            android:layout_marginTop="13.33dp"
+            android:hint="选择区域" />
+
+        <TextView
+            android:id="@+id/edit_agency"
+            style="@style/simple_input_01"
+            android:layout_marginTop="13.33dp"
+            android:hint="街道办事处" />
+
         <EditText
             android:id="@+id/edit_addr"
             style="@style/simple_input_01"
@@ -83,6 +95,28 @@
             android:id="@+id/view_age"
             style="@style/simple_text_01"
             android:text="年龄：23" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_px_2"
+            android:layout_marginLeft="13dp"
+            android:background="@color/theme_gray" />
+
+        <TextView
+            android:id="@+id/view_region"
+            style="@style/simple_text_01"
+            android:text="区域：朝阳区" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/space_px_2"
+            android:layout_marginLeft="13dp"
+            android:background="@color/theme_gray" />
+
+        <TextView
+            android:id="@+id/view_agency"
+            style="@style/simple_text_01"
+            android:text="街道办事处：北京市朝阳区朝阳区朝阳区朝阳区朝阳区朝阳区朝阳区朝阳区" />
 
         <View
             android:layout_width="match_parent"

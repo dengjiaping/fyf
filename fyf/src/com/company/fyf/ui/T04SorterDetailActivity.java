@@ -1,8 +1,5 @@
 package com.company.fyf.ui;
 
-import java.util.Calendar;
-import java.util.List;
-
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
@@ -23,9 +20,11 @@ import com.company.fyf.notify.IMsg;
 import com.company.fyf.notify.KeyList;
 import com.company.fyf.utils.FyfUtils;
 import com.company.fyf.utils.Logger;
-import com.company.fyf.widget.DatePickerDialog;
 import com.company.fyf.widget.DatePickerDialog.OnDateSetListener;
 import com.company.fyf.widget.TitleBar;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class T04SorterDetailActivity extends B01BaseActivity {
 	
@@ -187,20 +186,7 @@ public class T04SorterDetailActivity extends B01BaseActivity {
 	}
 	
 	private void showRegionDlg(){
-//		List<AreaVo> list = AreaDb.INSTANCE.getRegionList() ;
-//		if( list== null || list.size() == 0){
-//			new ApptoolServer(this).areas(new CallBack<Void>() {
-//				@Override
-//				public void onSuccess(Void t) {
-//					super.onSuccess(t);
-//					List<AreaVo> list = AreaDb.INSTANCE.getRegionList() ;
-//					showRegionDlg(list) ;
-//				}
-//			}) ;
-//		}else{
-//			showRegionDlg(list) ;
-//		}
-		
+
 		new ApptoolServer(this).areas(new CallBack<Void>() {
 			@Override
 			public void onSuccess(Void t) {
@@ -232,26 +218,6 @@ public class T04SorterDetailActivity extends B01BaseActivity {
 			showToast("请先选择区域") ;
 			return ;
 		}
-		
-//		List<AreaVo> list = AreaDb.INSTANCE.getAgencyList(rootId) ;
-//		if( list== null || list.size() == 0){
-//			new ApptoolServer(this).areas(new CallBack<Void>() {
-//				@Override
-//				public void onSuccess(Void t) {
-//					super.onSuccess(t);
-//					String rootId = getRegionId();
-//					
-//					if(TextUtils.isEmpty(rootId)){
-//						showToast("请先选择区域") ;
-//						return ;
-//					}
-//					List<AreaVo> list = AreaDb.INSTANCE.getAgencyList(rootId) ;
-//					showAgencyDlg(list) ;
-//				}
-//			}) ;
-//		}else{
-//			showAgencyDlg(list) ;
-//		}
 		
 		new ApptoolServer(this).areas(new CallBack<Void>() {
 			@Override

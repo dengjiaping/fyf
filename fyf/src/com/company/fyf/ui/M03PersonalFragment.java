@@ -3,6 +3,7 @@ package com.company.fyf.ui;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,8 @@ import com.company.fyf.net.CheckinServer;
 import com.company.fyf.net.DakaServer;
 import com.company.fyf.notify.IMsg;
 import com.company.fyf.notify.KeyList;
-import com.company.fyf.utils.CommConfig;
-import com.company.fyf.utils.Logger;
 import com.company.fyf.utils.CommConfig.SHARE_CONTENT;
+import com.company.fyf.utils.Logger;
 import com.company.fyf.widget.TitleBar;
 import com.lyx.utils.CalendarUtil;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -72,6 +72,7 @@ public class M03PersonalFragment extends B02BaseFragment implements
 		Logger.d("M03PersonalFragment", "[M03PersonalFragment onResume]")  ;
 		initUserView();
 		initShareComponent() ;
+		shouldCompleteAddress() ;
 	}
 
 	@Override
@@ -118,12 +119,44 @@ public class M03PersonalFragment extends B02BaseFragment implements
 		initShareComponent();
 	}
 
+	boolean isDialogForCompletePersonInfo = false;
+
 	void initFrom() {
 		// TODO Auto-generated method stub
 		from = getActivity().getIntent().getIntExtra(PARAM_INT_FROM,
 				FROM_DEFAULT);
 		if (from == FROM_LOGIN) {
-			showFromLoginDlg();
+			UserInfo userInfo = UserInfoDb.INSTANCE.get();
+			if(userInfo != null && "8".equals(userInfo.getGroupid())){
+				showFromLoginDlg();
+			}
+		}
+	}
+
+	boolean hasShowDialogForCompleteAddress = false ;
+
+	void shouldCompleteAddress(){
+		Logger.d("M03PersonalFragment","[shouldCompleteAddress]");
+		if(hasShowDialogForCompleteAddress) return;
+		if(isDialogForCompletePersonInfo) return;
+		UserInfo userInfo = UserInfoDb.INSTANCE.get() ;
+		if(userInfo == null){
+			return;
+		}
+		String areaId = userInfo.getAreaid() ;
+		if(TextUtils.isEmpty(areaId) || "0".equals(areaId)){
+			Logger.d("M03PersonalFragment","[shouldCompleteAddress]true");
+			showNormalDlg("是否完善地址信息？", "确定",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							Bundle bundle = new Bundle() ;
+							bundle.putString(T02PersonalDetailActivity.PARAM_STRING_FROM,
+									T02PersonalDetailActivity.FROM_FINISH_DETAIL_RIGHT_NOW) ;
+							showActivity(T02PersonalDetailActivity.class,bundle);
+							dialog.dismiss();
+						}
+					});
+			hasShowDialogForCompleteAddress = true ;
 		}
 	}
 
@@ -138,6 +171,7 @@ public class M03PersonalFragment extends B02BaseFragment implements
 						dialog.dismiss();
 					}
 				});
+		isDialogForCompletePersonInfo = true ;
 	}
 
 	private void initUserView() {

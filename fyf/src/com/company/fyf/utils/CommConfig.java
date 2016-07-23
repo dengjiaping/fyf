@@ -2,8 +2,6 @@ package com.company.fyf.utils;
 
 import android.os.Environment;
 
-import com.company.fyf.db.UserInfoDb;
-
 public class CommConfig {
 
 	public static final boolean DEBUG = false ;
