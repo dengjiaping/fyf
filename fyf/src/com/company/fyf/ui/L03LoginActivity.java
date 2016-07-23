@@ -7,9 +7,7 @@ import android.widget.CheckBox;
 
 import com.company.fyf.R;
 import com.company.fyf.db.UserDb;
-import com.company.fyf.db.UserInfoDb;
 import com.company.fyf.model.User;
-import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.net.MemberServer;
 import com.company.fyf.utils.FyfUtils;
@@ -83,6 +81,7 @@ public class L03LoginActivity extends B01BaseActivity {
 				
 				Bundle param = new Bundle() ;
 				param.putInt(M01MainActivity.PARAM_INT_TABINDEX, M01MainActivity.TAB_INDEX_PERSONAL) ;
+				param.putInt(M03PersonalFragment.PARAM_INT_FROM, M03PersonalFragment.FROM_LOGIN);
 				showActivity(M01MainActivity.class,param,Intent.FLAG_ACTIVITY_NEW_TASK) ;
 				finish(false) ;
 			}

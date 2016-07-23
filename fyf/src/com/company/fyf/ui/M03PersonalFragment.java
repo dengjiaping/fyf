@@ -39,7 +39,8 @@ public class M03PersonalFragment extends B02BaseFragment implements
 	public static final String PARAM_INT_FROM = "param_int_from";
 
 	public static final int FROM_DEFAULT = 0;
-	public static final int FROM_LOGIN = FROM_DEFAULT + 1;
+	public static final int FROM_REGISTER = FROM_DEFAULT + 1;
+	public static final int FROM_LOGIN = FROM_REGISTER + 1;
 
 	private int from = FROM_DEFAULT;
 
@@ -72,7 +73,6 @@ public class M03PersonalFragment extends B02BaseFragment implements
 		Logger.d("M03PersonalFragment", "[M03PersonalFragment onResume]")  ;
 		initUserView();
 		initShareComponent() ;
-		shouldCompleteAddress() ;
 	}
 
 	@Override
@@ -119,33 +119,30 @@ public class M03PersonalFragment extends B02BaseFragment implements
 		initShareComponent();
 	}
 
-	boolean isDialogForCompletePersonInfo = false;
-
 	void initFrom() {
 		// TODO Auto-generated method stub
 		from = getActivity().getIntent().getIntExtra(PARAM_INT_FROM,
 				FROM_DEFAULT);
-		if (from == FROM_LOGIN) {
+		if (from == FROM_REGISTER) {
 			UserInfo userInfo = UserInfoDb.INSTANCE.get();
 			if(userInfo != null && "8".equals(userInfo.getGroupid())){
 				showFromLoginDlg();
 			}
+		}else if (from == FROM_LOGIN) {
+			UserInfo userInfo = UserInfoDb.INSTANCE.get();
+			if(userInfo != null && "8".equals(userInfo.getGroupid())){
+				shouldCompleteAddress();
+			}
 		}
 	}
 
-	boolean hasShowDialogForCompleteAddress = false ;
-
 	void shouldCompleteAddress(){
-		Logger.d("M03PersonalFragment","[shouldCompleteAddress]");
-		if(hasShowDialogForCompleteAddress) return;
-		if(isDialogForCompletePersonInfo) return;
 		UserInfo userInfo = UserInfoDb.INSTANCE.get() ;
 		if(userInfo == null){
 			return;
 		}
 		String areaId = userInfo.getAreaid() ;
 		if(TextUtils.isEmpty(areaId) || "0".equals(areaId)){
-			Logger.d("M03PersonalFragment","[shouldCompleteAddress]true");
 			showNormalDlg("是否完善地址信息？", "确定",
 					new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
@@ -156,7 +153,6 @@ public class M03PersonalFragment extends B02BaseFragment implements
 							dialog.dismiss();
 						}
 					});
-			hasShowDialogForCompleteAddress = true ;
 		}
 	}
 
@@ -171,7 +167,6 @@ public class M03PersonalFragment extends B02BaseFragment implements
 						dialog.dismiss();
 					}
 				});
-		isDialogForCompletePersonInfo = true ;
 	}
 
 	private void initUserView() {

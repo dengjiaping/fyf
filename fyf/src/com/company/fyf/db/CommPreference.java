@@ -13,7 +13,8 @@ public class CommPreference {
 	private final String KEY_ABOUT_US = "key_about_us" ;
 	private final String KEY_POINTS_RULE = "key_points_rule" ;
 	private final String KEY_SHOULD_SHOW_GUIDE = "key_should_show_guide" ;
-	private final String KEY_SHOULD_DELETE_USER_TABLE = "key_should_delete_user_table" ;
+	//清除用户数据，可以该v1->2再次清除
+	private final String KEY_SHOULD_DELETE_USER_TABLE = "key_should_delete_user_table_v1" ;
 
 	public static CommPreference INSTANCE = new CommPreference() ;
 	

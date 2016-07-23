@@ -2,7 +2,6 @@ package com.company.fyf.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -69,7 +68,7 @@ public class L02RegisterSecondActivity extends B01BaseActivity {
 								
 								Bundle param = new Bundle() ;
 								param.putInt(M01MainActivity.PARAM_INT_TABINDEX, M01MainActivity.TAB_INDEX_PERSONAL) ;
-								param.putInt(M03PersonalFragment.PARAM_INT_FROM, M03PersonalFragment.FROM_LOGIN) ;
+								param.putInt(M03PersonalFragment.PARAM_INT_FROM, M03PersonalFragment.FROM_REGISTER) ;
 								showActivity(M01MainActivity.class,param,Intent.FLAG_ACTIVITY_NEW_TASK) ;
 								finish() ;
 							}
