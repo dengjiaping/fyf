@@ -30,8 +30,7 @@ public class UserInfo{
 	private String islock ;
 	private String connectid ;
 	private String credit_rank ;
-	private String[] cookies ;
-	
+
 //	private long localLoginTime ;
 //	private int auto = 1; //1 = 自动登录 0 = 非自动登录
 //	
