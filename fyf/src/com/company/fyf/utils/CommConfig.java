@@ -9,7 +9,7 @@ public class CommConfig {
 	public static final int DBVERSION = 1 ;
 	
 	public static final String API_VERSION = "1" ;
-	
+
 	public static final String DB_NAME = "fyf.db" ;
 	public static final String PREFERENCE_NAME = "fyf" ;
 	

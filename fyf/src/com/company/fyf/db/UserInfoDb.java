@@ -1,14 +1,12 @@
 package com.company.fyf.db;
 
-import java.util.List;
-
-import net.tsz.afinal.db.table.TableInfo;
-
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.notify.KeyList;
 import com.company.fyf.notify.NotifyCenter;
 import com.company.fyf.utils.Logger;
 import com.lyx.utils.CommUtil;
+
+import java.util.List;
 
 public class UserInfoDb extends AbstractDatabase  {
 	
@@ -46,7 +44,7 @@ public class UserInfoDb extends AbstractDatabase  {
 		NotifyCenter.sendEmptyMsg(KeyList.KEY_USER_INFO_UPDATE) ;
 	}
 
-	private void dropTable() {
+	public void dropTable() {
 		db.deleteAll(UserInfo.class) ;
 	}
 	

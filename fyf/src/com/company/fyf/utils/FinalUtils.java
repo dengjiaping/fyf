@@ -1,8 +1,7 @@
 package com.company.fyf.utils;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.FinalDb;
@@ -12,8 +11,9 @@ import net.tsz.afinal.FinalHttp;
 import org.apache.http.client.CookieStore;
 import org.apache.http.cookie.Cookie;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class FinalUtils {
 	
@@ -27,7 +27,6 @@ public class FinalUtils {
 //		finalHttp.configCookieStore(cookieStore) ;
 		db = FinalDb.create(ctx, null, CommConfig.DB_NAME,CommConfig.DEBUG, CommConfig.DBVERSION, new DbUpdateListener() {
 			public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-				
 			}
 		}) ;
 	}

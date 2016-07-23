@@ -13,7 +13,8 @@ public class CommPreference {
 	private final String KEY_ABOUT_US = "key_about_us" ;
 	private final String KEY_POINTS_RULE = "key_points_rule" ;
 	private final String KEY_SHOULD_SHOW_GUIDE = "key_should_show_guide" ;
-	
+	private final String KEY_SHOULD_DELETE_USER_TABLE = "key_should_delete_user_table" ;
+
 	public static CommPreference INSTANCE = new CommPreference() ;
 	
 	private SharedPreferencesUtils sp ;
@@ -58,6 +59,17 @@ public class CommPreference {
 	
 	public void setGuideNoShow(){
 		sp.setBoolean(KEY_SHOULD_SHOW_GUIDE, false) ;
+	}
+
+	public boolean shouldDeleteUserTable(){
+		if(!sp.hasKey(KEY_SHOULD_DELETE_USER_TABLE)){
+			return true;
+		}
+		return sp.getBoolean(KEY_SHOULD_DELETE_USER_TABLE) ;
+	}
+
+	public void setDeleteUserTableNo(){
+		sp.setBoolean(KEY_SHOULD_DELETE_USER_TABLE, false) ;
 	}
 
 }

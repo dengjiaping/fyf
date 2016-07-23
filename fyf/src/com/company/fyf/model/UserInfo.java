@@ -1,9 +1,9 @@
 package com.company.fyf.model;
 
+import com.company.fyf.utils.FyfUtils;
+
 import net.tsz.afinal.annotation.sqlite.Id;
 import net.tsz.afinal.annotation.sqlite.Table;
-
-import com.company.fyf.utils.FyfUtils;
 
 @Table(name="UserInfo")
 public class UserInfo{
@@ -30,6 +30,7 @@ public class UserInfo{
 	private String islock ;
 	private String connectid ;
 	private String credit_rank ;
+	private String[] cookies ;
 	
 //	private long localLoginTime ;
 //	private int auto = 1; //1 = 自动登录 0 = 非自动登录
