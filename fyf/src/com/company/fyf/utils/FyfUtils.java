@@ -1,13 +1,16 @@
 package com.company.fyf.utils;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.company.fyf.FyfApp;
 import com.lyx.utils.RegexUtil;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class FyfUtils {
 	
@@ -179,6 +182,25 @@ public class FyfUtils {
 			return true ;
 		}
 		return false ;
+	}
+
+	/**
+	 * 获取当前应用版本名称
+	 *
+	 * @return 当前应用的版本名称，如果获取失败则返回“”
+	 */
+	public static String getVersionName() {
+		String versionName = "";
+		PackageManager manager;
+		PackageInfo info = null;
+		try {
+			manager = FyfApp.INSTANCE.getPackageManager();
+			info = manager.getPackageInfo(FyfApp.INSTANCE.getPackageName(), 0);
+			versionName = info.versionName;
+		} catch (Exception e) {
+			versionName = "";
+		}
+		return versionName;
 	}
 
 }

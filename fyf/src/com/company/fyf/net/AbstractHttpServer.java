@@ -1,8 +1,19 @@
 package com.company.fyf.net;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import android.app.Activity;
+import android.content.Context;
+import android.text.TextUtils;
+import android.view.View;
+
+import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.utils.CommConfig;
+import com.company.fyf.utils.FinalUtils;
+import com.company.fyf.utils.FyfUtils;
+import com.company.fyf.utils.Logger;
+import com.lyx.dlg.load.CancelListener;
+import com.lyx.dlg.load.LoadingDialog;
+import com.lyx.dlg.load.RetryListener;
+import com.lyx.dlg.load.SimpleDialog;
 
 import net.tsz.afinal.FinalHttp;
 import net.tsz.afinal.http.AjaxCallBack;
@@ -11,21 +22,8 @@ import net.tsz.afinal.http.AjaxParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.content.Context;
-import android.text.TextUtils;
-import android.view.View;
-
-import com.company.fyf.FyfApp;
-import com.company.fyf.db.UserInfoDb;
-import com.company.fyf.utils.CommConfig;
-import com.company.fyf.utils.FinalUtils;
-import com.company.fyf.utils.Logger;
-import com.lyx.dlg.load.CancelListener;
-import com.lyx.dlg.load.LoadingDialog;
-import com.lyx.dlg.load.RetryListener;
-import com.lyx.dlg.load.SimpleDialog;
-import com.lyx.utils.CommUtil;
+import java.io.File;
+import java.io.FileNotFoundException;
 //整个类就是一个cell的概率
 public abstract class AbstractHttpServer {
 
@@ -52,6 +50,7 @@ public abstract class AbstractHttpServer {
 		this.params = new AjaxParams();
 		this.params.put("module", getModule());
 		this.params.put("api_version",CommConfig.API_VERSION);
+		this.params.put("version", FyfUtils.getVersionName());
 		this.params.put("sign", "1");
 		this.params.put("timestamp", String.valueOf(System.currentTimeMillis()));
 
