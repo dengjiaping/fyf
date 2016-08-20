@@ -1,12 +1,5 @@
 package com.company.fyf.db;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import android.text.TextUtils;
 
 import com.company.fyf.dao.AreaVo;
@@ -14,6 +7,13 @@ import com.company.fyf.model.Area;
 import com.company.fyf.notify.KeyList;
 import com.company.fyf.notify.NotifyCenter;
 import com.company.fyf.utils.Logger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class AreaDb extends AbstractDatabase {
 	
@@ -74,9 +74,16 @@ public class AreaDb extends AbstractDatabase {
 				if(_list.size() == 0){
 					continue ;
 				}
+				if(!TextUtils.isEmpty(areaName)){
+					areaName += "-" ;
+				}
 				areaName += _list.get(0).getName() ;
 			}
+			if(!TextUtils.isEmpty(areaName)){
+				areaName += "-" ;
+			}
 			areaName += area.getName() ;
+
 			vo = new AreaVo(area.getAreaid(), areaName) ;
 			vos.add(vo) ;
 		}

@@ -1,12 +1,5 @@
 package com.company.fyf.net;
 
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
@@ -16,6 +9,12 @@ import com.company.fyf.db.UserInfoDb;
 import com.company.fyf.model.User;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.utils.Logger;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
 
 public class MemberServer extends AbstractHttpServer {
 
@@ -38,11 +37,13 @@ public class MemberServer extends AbstractHttpServer {
 	 * 
 	 * POST
 	 */
-	public void register(String username, String password,
+	public void register(String username, String password,String areaid,String address,
 			String mobile_verify, final CallBack<UserInfo> back) {
 		addParam("act", "register");
 
 		addParam("username", username);
+		addParam("areaid", areaid);
+		addParam("address", address);
 		addParam("password", md5(password));
 		addParam("mobile_verify", mobile_verify);
 		doPost(new FilterAjaxCallBack(back) {
