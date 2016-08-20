@@ -3,23 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <com.company.fyf.widget.TitleBar
+        title="分类情况添加"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/titlebar_height"
-        title="分类情况添加" />
+        android:layout_height="@dimen/titlebar_height" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp" >
+            android:paddingRight="20dp">
 
             <TextView
                 android:id="@+id/area"
@@ -41,6 +41,37 @@
                 android:textColor="#cecece"
                 android:textSize="12sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_px_40"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/kilo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_shape_input_simple_01"
+                    android:hint="输入公斤数量"
+                    android:minWidth="100dp"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:padding="@dimen/space_px_40"
+                    android:textColor="#cecece"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:text="公斤"
+                    android:textColor="#202020"
+                    android:textSize="@dimen/txtsize_px_40" />
+
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_px_40"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/complete_01"
@@ -149,11 +180,11 @@
                 android:layout_width="276.67dp"
                 android:layout_height="41.33dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/space_px_80"
                 android:layout_marginBottom="@dimen/space_px_80"
+                android:layout_marginTop="@dimen/space_px_80"
+                android:background="@drawable/bg_btn_simple_06"
                 android:gravity="center"
                 android:text="提交"
-                android:background="@drawable/bg_btn_simple_06"
                 android:textColor="@color/white"
                 android:textSize="@dimen/txtsize_px_54" />
         </LinearLayout>

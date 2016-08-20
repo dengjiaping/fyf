@@ -1,8 +1,8 @@
 package com.company.fyf.dao;
 
-import java.io.Serializable;
-
 import com.company.fyf.utils.FyfUtils;
+
+import java.io.Serializable;
 
 public class RubbishVo implements Serializable{
 
@@ -11,6 +11,7 @@ public class RubbishVo implements Serializable{
 	private String username;
 	private String typeid;
 	private String name;
+	private String kilo;
 	private String complete;
 	private String pic_url;
 	private String note;
@@ -39,6 +40,12 @@ public class RubbishVo implements Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getKilo() {
+		return kilo;
+	}
+	public void setKilo(String kilo) {
+		this.kilo = kilo;
 	}
 	public String getComplete() {
 		return complete;

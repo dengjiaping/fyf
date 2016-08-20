@@ -1,18 +1,17 @@
 package com.company.fyf.net;
 
-import java.io.File;
-import java.util.List;
+import android.content.Context;
+
+import com.alibaba.fastjson.JSON;
+import com.company.fyf.dao.RubbishVo;
+import com.company.fyf.utils.CommConfig;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-
-import com.alibaba.fastjson.JSON;
-import com.company.fyf.dao.CommodityVo;
-import com.company.fyf.dao.RubbishVo;
-import com.company.fyf.utils.CommConfig;
+import java.io.File;
+import java.util.List;
 
 public class RubbishServer extends AbstractHttpServer {
 	
@@ -52,13 +51,14 @@ public class RubbishServer extends AbstractHttpServer {
 		POST
 	 */
 	
-	public void uploadRubbish(String pic,String name,String complete,String note,final CallBack<Void> back){
+	public void uploadRubbish(String pic,String name,String kilo,String complete,String note,final CallBack<Void> back){
 		
 		addParam("act", "uploadRubbish") ;
 		
 		addParam("pic_url", pic);
 		addParam("complete", complete);
 		addParam("name", name);
+		addParam("kilo", kilo);
 		addParam("note", note);
 		addParam("typeid", CommConfig.CLASSIFY_TYPE_ID.KITCHEN);
 		
@@ -72,7 +72,7 @@ public class RubbishServer extends AbstractHttpServer {
 		}) ;
 	}
 	
-	public void editMyRubbishInfoById(String id,String pic,String name,String complete,String note,final CallBack<Void> back){
+	public void editMyRubbishInfoById(String id,String pic,String name,String complete,String kilo,String note,final CallBack<Void> back){
 		
 		addParam("act", "EditMyRubbishInfoById") ;
 		
@@ -80,6 +80,7 @@ public class RubbishServer extends AbstractHttpServer {
 		addParam("pic_url", pic);
 		addParam("complete", complete);
 		addParam("name", name);
+		addParam("kilo", kilo);
 		addParam("note", note);
 		addParam("typeid", CommConfig.CLASSIFY_TYPE_ID.KITCHEN);
 		

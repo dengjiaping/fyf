@@ -1,8 +1,5 @@
 package com.company.fyf.ui;
 
-import java.io.File;
-import java.util.List;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +29,9 @@ import com.company.fyf.utils.CompressUtils;
 import com.company.fyf.utils.FyfUtils;
 import com.lyx.utils.ImageLoaderUtils;
 
+import java.io.File;
+import java.util.List;
+
 public class N03ClassificationAddActivity extends B01BaseActivity implements View.OnClickListener{
 	
 	public static final String PARAM_INT_FROM = "param_int_from";
@@ -44,7 +44,7 @@ public class N03ClassificationAddActivity extends B01BaseActivity implements Vie
 	
 	public static final int WHAT_TAKE_PICTURE = 102;
 	
-	private EditText name,note ;
+	private EditText name,note,kilo ;
 	private RadioGroup complete ;
 	private ImageView pic ;
 	private View submit ;
@@ -69,6 +69,7 @@ public class N03ClassificationAddActivity extends B01BaseActivity implements Vie
 		if(FROM_EDIT == from && rubbish != null){
 			note.setText(rubbish.getNote());
 			name.setText(rubbish.getName());
+			kilo.setText(rubbish.getKilo());
 			complete.check(getCompleteId(rubbish.getComplete()));
 			if(!TextUtils.isEmpty(rubbish.getPic_url()))
 				ImageLoaderUtils.displayPicWithAutoStretch(rubbish.getPic_url(), pic) ;
@@ -78,6 +79,7 @@ public class N03ClassificationAddActivity extends B01BaseActivity implements Vie
 	private void initComponent() {
 		// TODO Auto-generated method stub
 		name = (EditText) findViewById(R.id.name) ;
+		kilo = (EditText) findViewById(R.id.kilo) ;
 		note = (EditText) findViewById(R.id.note) ;
 		complete = (RadioGroup) findViewById(R.id.complete) ;
 		pic = (ImageView) findViewById(R.id.pic) ;
@@ -174,25 +176,30 @@ public class N03ClassificationAddActivity extends B01BaseActivity implements Vie
 			showToast("请输入小区名称位置") ;
 			return ;
 		}
+		String kilo = this.kilo.getText().toString() ;
+		if(FyfUtils.checkInputEmpty(kilo)){
+			showToast("请输入公斤数量") ;
+			return ;
+		}
 		int completeCode = getCompleteCode() ; 
 		if(completeCode == 0){
 			showToast("请选择任务完成量") ;
 			return ;
 		}
 		if(from == FROM_EDIT){
-			doEdit(name,completeCode + "");
+			doEdit(name,kilo,completeCode + "");
 		}else{
-			doAdd(name,completeCode + "");
+			doAdd(name,kilo,completeCode + "");
 		}
 	}
 
-	private void doEdit(final String name,final String completeCode) {
+	private void doEdit(final String name,final String kilo,final String completeCode) {
 		// TODO Auto-generated method stub
 		if(picFile == null 
 				|| TextUtils.isEmpty(picFile.getPath())
 				|| !picFile.exists()
 				|| picFile.length() == 0){
-			editMyRubbishInfoById(rubbish.getPic_url(),name,completeCode) ;
+			editMyRubbishInfoById(rubbish.getPic_url(),name,kilo,completeCode) ;
 			return ;
 		}
 		UploadServer uploadServer = new UploadServer(this) ;
@@ -202,13 +209,13 @@ public class N03ClassificationAddActivity extends B01BaseActivity implements Vie
 				super.onSuccess(t);
 				if(t != null && t.size() > 0){
 					String pic = t.get(0).getFilepath() ;
-					editMyRubbishInfoById(pic,name,completeCode) ;
+					editMyRubbishInfoById(pic,name,kilo,completeCode) ;
 				}
 			}
 		});
 	}
 
-	private void doAdd(final String name,final String completeCode) {
+	private void doAdd(final String name,final String kilo,final String completeCode) {
 		if(picFile == null 
 				|| TextUtils.isEmpty(picFile.getPath())
 				|| !picFile.exists()
@@ -223,15 +230,15 @@ public class N03ClassificationAddActivity extends B01BaseActivity implements Vie
 				super.onSuccess(t);
 				if(t != null && t.size() > 0){
 					String pic = t.get(0).getFilepath() ;
-					uploadRubbish(pic,name,completeCode) ;
+					uploadRubbish(pic,name,kilo,completeCode) ;
 				}
 			}
 		});
 	}
 	
-	private void uploadRubbish(String pic,String name,String complete){
+	private void uploadRubbish(String pic,String name,String kilo,String complete){
 		RubbishServer server = new RubbishServer(this) ;
-		server.uploadRubbish(pic, name, complete, note.getText().toString(), new CallBack<Void>() {
+		server.uploadRubbish(pic, name,kilo, complete, note.getText().toString(), new CallBack<Void>() {
 			@Override
 			public void onSuccess(Void t) {
 				super.onSuccess(t);
@@ -242,9 +249,9 @@ public class N03ClassificationAddActivity extends B01BaseActivity implements Vie
 		});
 	}
 	
-	private void editMyRubbishInfoById(String pic,String name,String complete){
+	private void editMyRubbishInfoById(String pic,String name,String kilo,String complete){
 		RubbishServer server = new RubbishServer(this) ;
-		server.editMyRubbishInfoById(rubbish.getId(),pic, name, complete, note.getText().toString(), new CallBack<Void>() {
+		server.editMyRubbishInfoById(rubbish.getId(),pic, name, kilo,complete, note.getText().toString(), new CallBack<Void>() {
 			@Override
 			public void onSuccess(Void t) {
 				super.onSuccess(t);
