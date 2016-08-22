@@ -17,6 +17,35 @@
         android:layout_marginTop="46.67dp"
         android:layout_marginLeft="@dimen/space_px_60"
         android:layout_marginRight="@dimen/space_px_60"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:id="@+id/seccode"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="46.67dp"
+            android:layout_marginRight="13.33dp"
+            android:singleLine="true"
+            android:gravity="left|center_vertical"
+            android:background="@drawable/bg_shape_input_simple_01"
+            android:hint="请输入图片验证码"
+            android:paddingLeft="8dp" />
+
+        <ImageView
+            android:id="@+id/seccode_img"
+            android:layout_width="96.67dp"
+            android:layout_height="46.67dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_click_to_refresh"  />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23.33dp"
+        android:layout_marginLeft="@dimen/space_px_60"
+        android:layout_marginRight="@dimen/space_px_60"
         android:orientation="horizontal" 
         android:gravity="center_vertical">
 

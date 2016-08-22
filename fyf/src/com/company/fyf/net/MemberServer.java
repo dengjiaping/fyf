@@ -120,11 +120,12 @@ public class MemberServer extends AbstractHttpServer {
 	 * 
 	 * POST
 	 */
-	public void sendCheckCode(String phonenum, final CallBack<String> back) {
+	public void sendCheckCode(String phonenum,String checkCode, final CallBack<String> back) {
 
 		addParam("act", "sendCheckCode");
 
 		addParam("phonenum", phonenum);
+		addParam("check_code", checkCode);
 
 		doPost(new FilterAjaxCallBack(back) {
 			public void onSuccess(String data) {

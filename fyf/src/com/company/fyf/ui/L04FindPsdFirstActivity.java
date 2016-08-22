@@ -2,26 +2,37 @@ package com.company.fyf.ui;
 
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.company.fyf.R;
-import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.net.MemberServer;
+import com.company.fyf.net.SecureServer;
 import com.company.fyf.utils.FyfUtils;
 import com.company.fyf.widget.ClearInputView;
 import com.company.fyf.widget.CountDownText;
 import com.company.fyf.widget.CountDownText.OnClickListener;
+import com.lyx.utils.ImageLoaderUtils;
 
 public class L04FindPsdFirstActivity extends B01BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.a_l04_layout) ; 
+		setContentView(R.layout.a_l04_layout) ;
+
+		final ImageView secodeImg = (ImageView) findViewById(R.id.seccode_img);
+		secodeImg.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				doGetSecode(secodeImg);
+			}
+		});
+		doGetSecode(secodeImg);
 		
 		final ClearInputView username = (ClearInputView) findViewById(R.id.username) ;
 		final CountDownText countDownText = (CountDownText) findViewById(R.id.countDownText) ;
@@ -87,14 +98,42 @@ public class L04FindPsdFirstActivity extends B01BaseActivity {
 				if(!FyfUtils.doCheckPhone(L04FindPsdFirstActivity.this, strUsername)){
 					return ;
 				}
+				final EditText editText = (EditText) findViewById(R.id.seccode);
+				String seccode = editText.getText().toString() ;
+
+				if(FyfUtils.checkInputEmpty(seccode)){
+					showToast("请输入图片验证码");
+					return ;
+				}
+
 				MemberServer memberServer = new MemberServer(L04FindPsdFirstActivity.this) ;
-				memberServer.sendCheckCode(strUsername, new CallBack<String>() {
+				memberServer.sendCheckCode(strUsername, seccode,new CallBack<String>() {
 					@Override
 					public void onSuccess(String t) {
 						super.onSuccess(t);
 						showToast("验证码已发送") ;
 					}
 				}); 
+			}
+		});
+	}
+
+	private void doGetSecode(final ImageView imageView){
+		new SecureServer(this).seccode(new CallBack<String>() {
+			@Override
+			public void onBadNet() {
+				super.onBadNet();
+			}
+
+			@Override
+			public void onFail() {
+				super.onFail();
+			}
+
+			@Override
+			public void onSuccess(String s) {
+				super.onSuccess(s);
+				ImageLoaderUtils.displayPicWithAutoStretch(s, imageView);
 			}
 		});
 	}

@@ -3,6 +3,8 @@ package com.company.fyf.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.company.fyf.R;
@@ -10,9 +12,11 @@ import com.company.fyf.model.User;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.net.MemberServer;
+import com.company.fyf.net.SecureServer;
 import com.company.fyf.utils.FyfUtils;
 import com.company.fyf.widget.CountDownText;
 import com.company.fyf.widget.CountDownText.OnClickListener;
+import com.lyx.utils.ImageLoaderUtils;
 
 public class L02RegisterSecondActivity extends B01BaseActivity {
 	
@@ -31,12 +35,30 @@ public class L02RegisterSecondActivity extends B01BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.a_l02_layout) ;
 		onGetIntentData() ;
+
+		final ImageView secodeImg = (ImageView) findViewById(R.id.seccode_img);
+		secodeImg.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				doGetSecode(secodeImg);
+			}
+		});
+		doGetSecode(secodeImg);
 		
 		final CountDownText countDownText = (CountDownText) findViewById(R.id.countDownText) ;
 		countDownText.setOnClickListener(new OnClickListener() {
 			public void onClick() {
+
+				final EditText editText = (EditText) findViewById(R.id.seccode);
+				String seccode = editText.getText().toString() ;
+
+				if(FyfUtils.checkInputEmpty(seccode)){
+					showToast("请输入图片验证码");
+					return ;
+				}
+
 				MemberServer memberServer = new MemberServer(L02RegisterSecondActivity.this) ;
-				memberServer.sendCheckCode(phone, new CallBack<String>() {
+				memberServer.sendCheckCode(phone,seccode, new CallBack<String>() {
 					@Override
 					public void onSuccess(String t) {
 						super.onSuccess(t);
@@ -89,6 +111,26 @@ public class L02RegisterSecondActivity extends B01BaseActivity {
 						}) ;
 					}
 				});
+			}
+		});
+	}
+
+	private void doGetSecode(final ImageView imageView){
+		new SecureServer(this).seccode(new CallBack<String>() {
+			@Override
+			public void onBadNet() {
+				super.onBadNet();
+			}
+
+			@Override
+			public void onFail() {
+				super.onFail();
+			}
+
+			@Override
+			public void onSuccess(String s) {
+				super.onSuccess(s);
+				ImageLoaderUtils.displayPicWithAutoStretch(s, imageView);
 			}
 		});
 	}
