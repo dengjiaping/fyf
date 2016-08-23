@@ -47,14 +47,14 @@ public class L02RegisterSecondActivity extends B01BaseActivity {
 		
 		final CountDownText countDownText = (CountDownText) findViewById(R.id.countDownText) ;
 		countDownText.setOnClickListener(new OnClickListener() {
-			public void onClick() {
+			public boolean onClick() {
 
 				final EditText editText = (EditText) findViewById(R.id.seccode);
 				String seccode = editText.getText().toString() ;
 
 				if(FyfUtils.checkInputEmpty(seccode)){
 					showToast("请输入图片验证码");
-					return ;
+					return true;
 				}
 
 				MemberServer memberServer = new MemberServer(L02RegisterSecondActivity.this) ;
@@ -64,7 +64,20 @@ public class L02RegisterSecondActivity extends B01BaseActivity {
 						super.onSuccess(t);
 						showToast("验证码已发送") ;
 					}
-				}); 
+
+					@Override
+					public void onBadNet() {
+						super.onBadNet();
+						countDownText.reset();
+					}
+
+					@Override
+					public void onFail() {
+						super.onFail();
+						countDownText.reset();
+					}
+				});
+				return false;
 			}
 		});
 		

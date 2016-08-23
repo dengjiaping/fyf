@@ -40,9 +40,10 @@ public class CountDownText extends TextView implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
+		if(onClickListener != null && onClickListener.onClick()) return;
 		setEnabled(false) ;
 		timer.start() ;
-		if(onClickListener != null) onClickListener.onClick();
+
 	} 
 	
 	private CountDownTimer timer = new CountDownTimer(MAX_SECOND * 1000,1000) {
@@ -68,9 +69,19 @@ public class CountDownText extends TextView implements OnClickListener{
 	}
 
 	public interface OnClickListener{
-		public void onClick() ;
+		public boolean onClick() ;
 	}
 
+	public void reset(){
+		Logger.d("CountDownText", "reset") ;
+		timer.cancel();
+		setEnabled(true) ;
+		setText(TEXT_DEFAULT) ;
+	}
 
-	
+	@Override
+	protected void onDetachedFromWindow() {
+		super.onDetachedFromWindow();
+		timer.cancel();
+	}
 }

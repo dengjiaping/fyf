@@ -141,6 +141,22 @@ public class MemberServer extends AbstractHttpServer {
 					}
 				}
 			}
+
+			@Override
+			public void onFail() {
+				super.onFail();
+				if (back != null) {
+					back.onFail();
+				}
+			}
+
+			@Override
+			public void onBadNet() {
+				super.onBadNet();
+				if (back != null) {
+					back.onBadNet();
+				}
+			}
 		});
 	}
 

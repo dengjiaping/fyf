@@ -144,6 +144,10 @@ public abstract class AbstractHttpServer {
 							||"login_other_device_please_login".equals(error_msg)){
 						UserInfoDb.INSTANCE.clear();
 					}
+
+					if (callBack != null) {
+						callBack.onFail();
+					}
 					
 					if(!TextUtils.isEmpty(msg.getString("error_str"))){
 						checkIsNeedShowFailMsg(msg.getString("error_str")) ;
@@ -153,6 +157,10 @@ public abstract class AbstractHttpServer {
 			} catch (JSONException e) {
 				e.printStackTrace();
 				showAnalyticalException(callBack) ;
+
+				if (callBack != null) {
+					callBack.onFail();
+				}
 			}
 			
 		}
