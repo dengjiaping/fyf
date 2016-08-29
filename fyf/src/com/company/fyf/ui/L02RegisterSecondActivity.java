@@ -20,11 +20,13 @@ import com.lyx.utils.ImageLoaderUtils;
 
 public class L02RegisterSecondActivity extends B01BaseActivity {
 	
+	public static final String PARAM_STRING_NICKNAME = "param_nickname" ;
 	public static final String PARAM_STRING_PHONE = "param_phone" ;
 	public static final String PARAM_STRING_PSD = "param_psd" ;
 	public static final String PARAM_STRING_AREAID = "param_areaid" ;
 	public static final String PARAM_STRING_ADDRESS = "param_address" ;
 
+	private String nickname = "" ;
 	private String phone = "" ;
 	private String psd = "" ;
 	private String areaid = "" ;
@@ -94,7 +96,7 @@ public class L02RegisterSecondActivity extends B01BaseActivity {
 				}
 				
 				MemberServer memberServer = new MemberServer(L02RegisterSecondActivity.this) ;
-				memberServer.register(phone, psd,areaid,address,mobile_verify, new CallBack<UserInfo>() {
+				memberServer.register(nickname,phone, psd,areaid,address,mobile_verify, new CallBack<UserInfo>() {
 					@Override
 					public void onSuccess(UserInfo t) {
 						super.onSuccess(t);

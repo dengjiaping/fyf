@@ -1,68 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fyf="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:background="@color/theme_gray"
-    android:gravity="center_horizontal"
-    android:orientation="vertical" >
-
-    <com.company.fyf.widget.TitleBar
+    android:layout_width="match_parent">
+    <LinearLayout
+        xmlns:fyf="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/titlebar_height"
-        title="注册" />
+        android:layout_height="match_parent"
+        android:background="@color/theme_gray"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <com.company.fyf.widget.ClearInputView
-        android:id="@+id/username"
-        style="@style/clear_input_view"
-        android:layout_marginTop="25dp"
-        fyf:hint="请输入11位手机号"
-        fyf:icon="@drawable/ic_comm_phone" 
-        fyf:type="1"/>
+        <com.company.fyf.widget.TitleBar
+            title="注册"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/titlebar_height" />
 
-    <com.company.fyf.widget.ClearInputView
-        android:id="@+id/psd"
-        style="@style/clear_input_view"
-        android:layout_marginTop="@dimen/space_px_50"
-        fyf:hint="请输入登录密码"
-        fyf:icon="@drawable/ic_comm_locker" 
-        fyf:type="2"/>
+        <com.company.fyf.widget.ClearInputView
+            android:id="@+id/username"
+            style="@style/clear_input_view"
+            android:layout_marginTop="25dp"
+            fyf:hint="请输入11位手机号"
+            fyf:icon="@drawable/ic_comm_phone"
+            fyf:type="1" />
 
-    <com.company.fyf.widget.ClearInputView
-        android:id="@+id/confirmpsd"
-        style="@style/clear_input_view"
-        android:layout_marginTop="@dimen/space_px_50"
-        fyf:hint="确认登录密码"
-        fyf:icon="@drawable/ic_comm_locker" 
-        fyf:type="2"/>
+        <com.company.fyf.widget.ClearInputView
+            android:id="@+id/psd"
+            style="@style/clear_input_view"
+            android:layout_marginTop="@dimen/space_px_50"
+            fyf:hint="请输入登录密码"
+            fyf:icon="@drawable/ic_comm_locker"
+            fyf:type="2" />
 
-    <TextView
-        android:id="@+id/edit_region"
-        style="@style/simple_input_01"
-        android:layout_height="@dimen/space_px_138"
-        android:layout_marginTop="@dimen/space_px_50"
-        android:hint="选择区域" />
+        <com.company.fyf.widget.ClearInputView
+            android:id="@+id/confirmpsd"
+            style="@style/clear_input_view"
+            android:layout_marginTop="@dimen/space_px_50"
+            fyf:hint="确认登录密码"
+            fyf:icon="@drawable/ic_comm_locker"
+            fyf:type="2" />
 
-    <TextView
-        android:id="@+id/edit_agency"
-        style="@style/simple_input_01"
-        android:minHeight="@dimen/space_px_138"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_px_50"
-        android:hint="街道办事处" />
+        <EditText
+            android:id="@+id/edit_name"
+            style="@style/simple_input_01"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_px_50"
+            android:hint="姓名"
+            android:minHeight="@dimen/space_px_138" />
 
-    <EditText
-        android:id="@+id/edit_addr"
-        style="@style/simple_input_01"
-        android:minHeight="@dimen/space_px_138"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/space_px_50"
-        android:hint="家庭住址" />
+        <TextView
+            android:id="@+id/edit_region"
+            style="@style/simple_input_01"
+            android:layout_height="@dimen/space_px_138"
+            android:layout_marginTop="@dimen/space_px_50"
+            android:hint="选择区域" />
 
-    <TextView
-        android:id="@+id/nextStep"
-        style="@style/simple_btn_00"
-        android:layout_marginTop="18.67dp"
-        android:text="下一步"/>
+        <TextView
+            android:id="@+id/edit_agency"
+            style="@style/simple_input_01"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_px_50"
+            android:hint="街道办事处"
+            android:minHeight="@dimen/space_px_138" />
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/edit_addr"
+            style="@style/simple_input_01"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_px_50"
+            android:hint="家庭住址"
+            android:minHeight="@dimen/space_px_138" />
+
+        <TextView
+            android:id="@+id/nextStep"
+            style="@style/simple_btn_00"
+            android:layout_marginTop="18.67dp"
+            android:text="下一步" />
+
+    </LinearLayout>
+</ScrollView>

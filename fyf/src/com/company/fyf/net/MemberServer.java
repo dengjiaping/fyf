@@ -37,10 +37,11 @@ public class MemberServer extends AbstractHttpServer {
 	 * 
 	 * POST
 	 */
-	public void register(String username, String password,String areaid,String address,
+	public void register(String nickname,String username, String password,String areaid,String address,
 			String mobile_verify, final CallBack<UserInfo> back) {
 		addParam("act", "register");
 
+		addParam("nickname", nickname);
 		addParam("username", username);
 		addParam("areaid", areaid);
 		addParam("address", address);

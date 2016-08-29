@@ -22,7 +22,7 @@ public class L01RegisterFirstActivity extends B01BaseActivity {
 
 	private ClearInputView username, psd, confirmpsd;
 	private View nextStep;
-	private TextView edit_addr ;
+	private TextView edit_addr,edit_name ;
 	private TextView edit_region,edit_agency ;
 
 	@Override
@@ -42,7 +42,8 @@ public class L01RegisterFirstActivity extends B01BaseActivity {
 				String confirmPwd = confirmpsd.getText() ;
 				final String areaid = edit_agency.getTag().toString();
 				final String address =  edit_addr.getText().toString() ;
-				if(!doCheck(phoneNum,pwd,confirmPwd,areaid,address)){
+				final String name =  edit_name.getText().toString() ;
+				if(!doCheck(phoneNum,pwd,confirmPwd,name,areaid,address)){
 					return ;
 				}
 				MemberServer memberServer = new MemberServer(L01RegisterFirstActivity.this) ;
@@ -53,7 +54,7 @@ public class L01RegisterFirstActivity extends B01BaseActivity {
 						if(t == 1){
 							showToast("该手机号已经存在") ;
 						}else{
-							skipToNextActivity(phoneNum, pwd,areaid,address);
+							skipToNextActivity(phoneNum, pwd,name,areaid,address);
 						}
 					}
 				}) ;
@@ -81,28 +82,35 @@ public class L01RegisterFirstActivity extends B01BaseActivity {
 			}
 		}) ;
 		edit_addr= (TextView) findViewById(R.id.edit_addr) ;
+		edit_name= (TextView) findViewById(R.id.edit_name) ;
 
 	}
 	
 	
 	private void skipToNextActivity(final String phoneNum,
-			final String pwd,String areaid,String address) {
+			final String pwd,String name,String areaid,String address) {
 		Bundle param = new Bundle() ;
 		param.putString(L02RegisterSecondActivity.PARAM_STRING_PHONE, phoneNum) ;
 		param.putString(L02RegisterSecondActivity.PARAM_STRING_PSD, pwd) ;
 		param.putString(L02RegisterSecondActivity.PARAM_STRING_AREAID, areaid) ;
 		param.putString(L02RegisterSecondActivity.PARAM_STRING_ADDRESS, address) ;
+		param.putString(L02RegisterSecondActivity.PARAM_STRING_NICKNAME, name) ;
 		showActivity(L02RegisterSecondActivity.class,param);
 	}
 
 	private boolean doCheck(final String phoneNum, final String pwd,
-			String confirmPwd,String areaid,String address) {
+			String confirmPwd,String name,String areaid,String address) {
 		if(!FyfUtils.doCheckPhonePwd(this, phoneNum, pwd)){
 			return false ;
 		}
 		
 		if (!pwd.equals(confirmPwd)) {
 			showToast("两次密码输入不一致");
+			return false ;
+		}
+
+		if(TextUtils.isEmpty(name)){
+			showToast("请输入姓名");
 			return false ;
 		}
 
