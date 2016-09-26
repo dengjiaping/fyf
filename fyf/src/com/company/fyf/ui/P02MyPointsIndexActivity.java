@@ -1,8 +1,5 @@
 package com.company.fyf.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +9,7 @@ import android.widget.TextView;
 
 import com.company.fyf.R;
 import com.company.fyf.dao.CommodityVo;
-import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.net.MallServer;
 import com.company.fyf.utils.CommConfig;
@@ -22,6 +19,9 @@ import com.company.fyf.widget.empty.EmptyViewRefreshGridView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class P02MyPointsIndexActivity extends B01BaseActivity implements OnRefreshListener2<GridView>{
 	
@@ -50,7 +50,7 @@ public class P02MyPointsIndexActivity extends B01BaseActivity implements OnRefre
 		});
 		
 		TextView credit = (TextView) findViewById(R.id.credit) ;
-		credit.setText(UserInfoDb.INSTANCE.get().getCredit()) ;
+		credit.setText(CommPreference.INSTANCE.getUserInfo().getCredit()) ;
 		
 		View pointsRule = findViewById(R.id.pointsRule) ;
 		pointsRule.setOnClickListener(new View.OnClickListener() {

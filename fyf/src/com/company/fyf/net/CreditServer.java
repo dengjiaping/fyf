@@ -1,20 +1,18 @@
 package com.company.fyf.net;
 
-import java.util.List;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.company.fyf.dao.CreditVo;
 import com.company.fyf.db.CommPreference;
-import com.company.fyf.db.UserInfoDb;
-import com.company.fyf.model.Credit;
 import com.company.fyf.model.CreditRank;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.utils.CommConfig;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class CreditServer extends AbstractHttpServer {
 

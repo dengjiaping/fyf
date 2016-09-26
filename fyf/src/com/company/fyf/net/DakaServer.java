@@ -1,18 +1,16 @@
 package com.company.fyf.net;
 
-import java.util.List;
+import android.content.Context;
+
+import com.alibaba.fastjson.JSON;
+import com.company.fyf.db.CommPreference;
+import com.company.fyf.model.Daka;
+import com.company.fyf.model.UserInfo;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-
-import com.alibaba.fastjson.JSON;
-import com.company.fyf.db.UserInfoDb;
-import com.company.fyf.model.Credit;
-import com.company.fyf.model.Daka;
-import com.company.fyf.model.UserInfo;
-import com.company.fyf.utils.FyfUtils;
+import java.util.List;
 
 public class DakaServer extends AbstractHttpServer{
 	
@@ -40,10 +38,10 @@ public class DakaServer extends AbstractHttpServer{
 				try {
 					// {"result":{"id":"7","username":"13200000000","worktime":"1446991230","workofftime":"0","day":"20151108"},"success":1}
 					Daka daka = JSON.parseObject(data, Daka.class) ;
-					UserInfo info = UserInfoDb.INSTANCE.get() ;
+					UserInfo info = CommPreference.INSTANCE.getUserInfo() ;
 					info.setDaka_lasted_work(daka.getWorktime());
 					info.setDaka_lasted_workoff(daka.getWorkofftime());
-					UserInfoDb.INSTANCE.update(info);
+					CommPreference.INSTANCE.updateUserInfo(info);
 					if(back != null){
 						back.onSuccess(null) ;
 					}

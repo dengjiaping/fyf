@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.company.fyf.R;
 import com.company.fyf.dao.AreaVo;
 import com.company.fyf.db.AreaDb;
-import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.ApptoolServer;
 import com.company.fyf.net.CallBack;
@@ -109,7 +109,7 @@ public class T04SorterDetailActivity extends B01BaseActivity {
 	}
 
 	private void initData() {
-		UserInfo info = UserInfoDb.INSTANCE.get() ;
+		UserInfo info = CommPreference.INSTANCE.getUserInfo();
 		if(info == null){
 			return ;
 		}

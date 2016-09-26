@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.company.fyf.R;
-import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.net.CheckinServer;
@@ -124,12 +124,12 @@ public class M03PersonalFragment extends B02BaseFragment implements
 		from = getActivity().getIntent().getIntExtra(PARAM_INT_FROM,
 				FROM_DEFAULT);
 		if (from == FROM_REGISTER) {
-			UserInfo userInfo = UserInfoDb.INSTANCE.get();
+			UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
 			if(userInfo != null && "8".equals(userInfo.getGroupid())){
 				showFromLoginDlg();
 			}
 		}else if (from == FROM_LOGIN) {
-			UserInfo userInfo = UserInfoDb.INSTANCE.get();
+			UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
 			if(userInfo != null && "8".equals(userInfo.getGroupid())){
 				shouldCompleteAddress();
 			}
@@ -137,7 +137,7 @@ public class M03PersonalFragment extends B02BaseFragment implements
 	}
 
 	void shouldCompleteAddress(){
-		UserInfo userInfo = UserInfoDb.INSTANCE.get() ;
+		UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
 		if(userInfo == null){
 			return;
 		}
@@ -174,7 +174,7 @@ public class M03PersonalFragment extends B02BaseFragment implements
 		if (root == null)
 			return;
 
-		UserInfo userInfo = UserInfoDb.INSTANCE.get();
+		UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
 
 		if (userInfo == null) {
 			root.findViewById(R.id.ll_noinfo_area).setVisibility(View.VISIBLE);
@@ -319,7 +319,7 @@ public class M03PersonalFragment extends B02BaseFragment implements
 	}
 
 	private void doGoOffWork() {
-		UserInfo userInfo = UserInfoDb.INSTANCE.get();
+		UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();;
 		if(!CalendarUtil.isToday(userInfo.getJavaDaka_lasted_work())){
 			showToast("你还没有打上班卡哦！") ;
 			return ;
@@ -434,7 +434,7 @@ public class M03PersonalFragment extends B02BaseFragment implements
 	}
 	
 	private String getShareTargerUrl(){
-		UserInfo user =  UserInfoDb.INSTANCE.get() ;
+		UserInfo user =  CommPreference.INSTANCE.getUserInfo() ;
 		return  SHARE_CONTENT.TARGETURL
 				+ (user == null ? "" : user.getUserid()) ;
 	}

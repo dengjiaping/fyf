@@ -1,7 +1,5 @@
 package com.company.fyf.ui;
 
-import org.json.JSONObject;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,8 +8,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.company.fyf.dao.SweepVo;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.db.MemberSettingDao;
-import com.company.fyf.db.UserInfoDb;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.ApptoolServer;
 import com.company.fyf.net.CallBack;
@@ -20,6 +18,8 @@ import com.company.fyf.net.MemberServer;
 import com.company.fyf.utils.SweepHelper;
 import com.umeng.analytics.MobclickAgent;
 import com.zxing.ui.CaptureActivity;
+
+import org.json.JSONObject;
 
 public class C06SweepActivity extends CaptureActivity {
 
@@ -37,7 +37,7 @@ public class C06SweepActivity extends CaptureActivity {
 	public void onDecode(String data) {
 		super.onDecode(data);
 		if (SweepHelper.getType(data) == SweepHelper.TYPE.GET_USER_INFO) {
-			UserInfo info = UserInfoDb.INSTANCE.get();
+			UserInfo info = CommPreference.INSTANCE.getUserInfo();
 			if (info == null) {
 				doErrorAction( "您还没有登录哦！") ;
 				return;
@@ -48,7 +48,7 @@ public class C06SweepActivity extends CaptureActivity {
 			}
 			doGetUserInfoAction(data);
 		}else if (SweepHelper.getType(data) == SweepHelper.TYPE.USER_ADD_CREDIT_BY_SELF) {
-			UserInfo info = UserInfoDb.INSTANCE.get();
+			UserInfo info = CommPreference.INSTANCE.getUserInfo();
 			if (info == null) {
 				doErrorAction( "您还没有登录哦！") ;
 				return;
@@ -122,7 +122,7 @@ public class C06SweepActivity extends CaptureActivity {
 				@Override
 				public void onSuccess(final SweepVo sweepVo) {
 					super.onSuccess(sweepVo);
-					UserInfo info = UserInfoDb.INSTANCE.get();
+					UserInfo info = CommPreference.INSTANCE.getUserInfo();
 					if (sweepVo != null && info != null
 							&& "9".equals(info.getGroupid())) {
 						ApptoolServer apptoolServer = new ApptoolServer(C06SweepActivity.this) ;

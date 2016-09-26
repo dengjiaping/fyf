@@ -1,8 +1,5 @@
 package com.company.fyf.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -12,15 +9,16 @@ import android.view.ViewGroup;
 
 import com.company.fyf.R;
 import com.company.fyf.dao.BannerVo;
-import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.net.ApptoolServer;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.notify.IMsg;
-import com.company.fyf.notify.INotifyClient;
 import com.company.fyf.notify.KeyList;
 import com.company.fyf.widget.CrouselImage;
 import com.company.fyf.widget.TitleBar;
-import com.zxing.ui.CaptureActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class M02HomeFragment extends B02BaseFragment {
 	
@@ -138,7 +136,7 @@ public class M02HomeFragment extends B02BaseFragment {
 				startActivity(intent) ;
 			}
 		}) ;
-		if(UserInfoDb.INSTANCE.get() != null){
+		if( CommPreference.INSTANCE.getUserInfo() != null){
 			titlebar.hideMenuBtn() ;
 		}
 	}

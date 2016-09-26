@@ -3,6 +3,8 @@ package com.company.fyf.db;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.JSON;
+import com.company.fyf.model.UserInfo;
 import com.company.fyf.notify.KeyList;
 import com.company.fyf.notify.NotifyCenter;
 import com.company.fyf.utils.CommConfig;
@@ -13,8 +15,8 @@ public class CommPreference {
 	private final String KEY_ABOUT_US = "key_about_us" ;
 	private final String KEY_POINTS_RULE = "key_points_rule" ;
 	private final String KEY_SHOULD_SHOW_GUIDE = "key_should_show_guide" ;
-	//清除用户数据，可以该v1->2再次清除
-	private final String KEY_SHOULD_DELETE_USER_TABLE = "key_should_delete_user_table_v1" ;
+	private final String KEY_USER_INFO = "key_user_info" ;
+
 
 	public static CommPreference INSTANCE = new CommPreference() ;
 	
@@ -62,15 +64,50 @@ public class CommPreference {
 		sp.setBoolean(KEY_SHOULD_SHOW_GUIDE, false) ;
 	}
 
-	public boolean shouldDeleteUserTable(){
-		if(!sp.hasKey(KEY_SHOULD_DELETE_USER_TABLE)){
-			return true;
+
+	public void setUserInfo(String userInfo){
+		if(TextUtils.isEmpty(userInfo)){
+			sp.setString(KEY_USER_INFO,"");
+		}else {
+			sp.setString(KEY_USER_INFO,userInfo);
 		}
-		return sp.getBoolean(KEY_SHOULD_DELETE_USER_TABLE) ;
+		NotifyCenter.sendEmptyMsg(KeyList.KEY_USER_INFO_UPDATE) ;
 	}
 
-	public void setDeleteUserTableNo(){
-		sp.setBoolean(KEY_SHOULD_DELETE_USER_TABLE, false) ;
+	public void updateUserInfo(UserInfo userInfo){
+
+		if(userInfo == null){
+			clearUserInfo();
+			return;
+		}
+
+		try {
+			String s = JSON.toJSONString(userInfo) ;
+			setUserInfo(s);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
+	public void clearUserInfo(){
+		setUserInfo(null);
+	}
+
+	public UserInfo getUserInfo(){
+
+		String s = sp.getString(KEY_USER_INFO) ;
+
+		if(TextUtils.isEmpty(s)){
+			return null ;
+		}
+
+		try {
+			return JSON.parseObject(s,UserInfo.class) ;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null ;
+		}
+	}
+
 
 }

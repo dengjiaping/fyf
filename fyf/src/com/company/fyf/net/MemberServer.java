@@ -4,8 +4,8 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.company.fyf.dao.SweepVo;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.db.UserDb;
-import com.company.fyf.db.UserInfoDb;
 import com.company.fyf.model.User;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.utils.Logger;
@@ -58,7 +58,7 @@ public class MemberServer extends AbstractHttpServer {
 					if (info != null) {
 						if (back != null)
 							back.onSuccess(info);
-						UserInfoDb.INSTANCE.update(info);
+						CommPreference.INSTANCE.setUserInfo(userinfo);
 					} else {
 						showAnalyticalException(back);
 					}
@@ -95,7 +95,7 @@ public class MemberServer extends AbstractHttpServer {
 					UserInfo info = JSON.parseObject(userinfo, UserInfo.class);
 
 					if (info != null) {
-						UserInfoDb.INSTANCE.update(info);
+						CommPreference.INSTANCE.setUserInfo(userinfo);
 						User user = new User();
 						user.setLocalLoginTime(System.currentTimeMillis());
 						user.setUsername(info.getUsername());
@@ -336,7 +336,7 @@ public class MemberServer extends AbstractHttpServer {
 					if (info != null) {
 						if (back != null)
 							back.onSuccess(info);
-						UserInfoDb.INSTANCE.update(info);
+						CommPreference.INSTANCE.setUserInfo(userinfo);
 					} else {
 						showAnalyticalException(back);
 					}

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.company.fyf.R;
-import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.model.UserInfo;
 import com.lyx.utils.QRCodeHelper;
 
@@ -43,7 +43,7 @@ public class C08QRCodeActivity extends B01BaseActivity {
 	}
 	
 	private String getInfomation(){
-		UserInfo user = UserInfoDb.INSTANCE.get() ;
+		UserInfo user = CommPreference.INSTANCE.getUserInfo();
 		return  "{\"tag\":\"25ec1187-c3e0-473c-ad49-71ee0b9f7d2b\",\"data\":\""+user.getUsername()+"\"}" ;
 	}
 

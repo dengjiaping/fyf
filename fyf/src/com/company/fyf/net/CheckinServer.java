@@ -4,11 +4,9 @@ import android.content.Context;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
-import com.company.fyf.FyfApp;
-import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.model.Checkin;
 import com.company.fyf.model.UserInfo;
-import com.company.fyf.utils.FyfUtils;
 
 public class CheckinServer extends AbstractHttpServer{
 	
@@ -44,11 +42,11 @@ public class CheckinServer extends AbstractHttpServer{
 					showAnalyticalException(back) ;
 					return ;
 				}
-				UserInfo info = UserInfoDb.INSTANCE.get() ;
+				UserInfo info = CommPreference.INSTANCE.getUserInfo();
 				info.setCheckin_month_total(checkin.getMdays()) ;
 				info.setCheckin_lasted_time(checkin.getCheckintime()) ;
 				info.setCredit(checkin.getCredit()) ;
-				UserInfoDb.INSTANCE.update(info) ;
+				CommPreference.INSTANCE.updateUserInfo(info);
 				if(back != null){
 					back.onSuccess(checkin) ;
 				}

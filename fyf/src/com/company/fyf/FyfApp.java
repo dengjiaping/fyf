@@ -3,7 +3,6 @@ package com.company.fyf;
 import android.app.Application;
 
 import com.company.fyf.db.CommPreference;
-import com.company.fyf.db.UserInfoDb;
 import com.company.fyf.utils.FinalUtils;
 import com.lyx.utils.ImageLoaderUtils;
 
@@ -20,10 +19,6 @@ public class FyfApp extends Application {
 		FinalUtils.init(this) ;
 		ImageLoaderUtils.init(this, R.drawable.ic_launcher) ;
 		CommPreference.INSTANCE.init(this) ;
-		if(CommPreference.INSTANCE.shouldDeleteUserTable()){
-			UserInfoDb.INSTANCE.dropTable();
-			CommPreference.INSTANCE.setDeleteUserTableNo();
-		}
 	}
 
 }

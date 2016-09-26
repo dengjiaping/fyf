@@ -1,9 +1,5 @@
 package com.company.fyf.ui;
 
-import java.io.File;
-
-import net.tsz.afinal.FinalHttp;
-import net.tsz.afinal.http.AjaxCallBack;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,7 +10,7 @@ import android.widget.TextView;
 
 import com.company.fyf.R;
 import com.company.fyf.dao.UpdateinfoVo;
-import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.ApptoolServer;
 import com.company.fyf.net.CallBack;
@@ -22,6 +18,11 @@ import com.company.fyf.net.MemberServer;
 import com.company.fyf.utils.CommConfig;
 import com.company.fyf.utils.FinalUtils;
 import com.lyx.utils.CommUtil;
+
+import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.http.AjaxCallBack;
+
+import java.io.File;
 
 public class T01SetupIndexActivity extends B01BaseActivity implements View.OnClickListener{
 
@@ -100,7 +101,7 @@ public class T01SetupIndexActivity extends B01BaseActivity implements View.OnCli
 		View v1 = findViewById(R.id.btn_logout_line_up) ;
 		View v2 = findViewById(R.id.btn_logout) ;
 		View v3 = findViewById(R.id.btn_logout_line_down) ;
-		if(UserInfoDb.INSTANCE.get() == null){
+		if(CommPreference.INSTANCE.getUserInfo() == null){
 			v1.setVisibility(View.GONE);
 			v2.setVisibility(View.GONE);
 			v3.setVisibility(View.GONE);
@@ -135,7 +136,7 @@ public class T01SetupIndexActivity extends B01BaseActivity implements View.OnCli
 	}
 
 	private void doPersonalDetailAction() {
-		UserInfo userInfo = UserInfoDb.INSTANCE.get() ;
+		UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
 		if(userInfo == null){
 			showActivity(L03LoginActivity.class) ;
 		}else if("8".equals(userInfo.getGroupid())){//groupid=8是用户  9是分拣员
@@ -148,7 +149,7 @@ public class T01SetupIndexActivity extends B01BaseActivity implements View.OnCli
 	}
 
 	private void doFeedBackAction() {
-		UserInfo userInfo = UserInfoDb.INSTANCE.get() ;
+		UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
 		if(userInfo == null)
 			showActivity(L03LoginActivity.class) ;
 		else
@@ -156,7 +157,7 @@ public class T01SetupIndexActivity extends B01BaseActivity implements View.OnCli
 	}
 	
 	private void doLogoutAction() {
-		UserInfoDb.INSTANCE.clear() ;
+		CommPreference.INSTANCE.clearUserInfo();
 		new MemberServer().logout(null) ;
 		finish() ;
 	}

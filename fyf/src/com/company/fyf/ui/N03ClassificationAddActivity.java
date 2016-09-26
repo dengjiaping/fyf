@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.company.fyf.R;
 import com.company.fyf.dao.FileVo;
 import com.company.fyf.dao.RubbishVo;
-import com.company.fyf.db.UserInfoDb;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.net.RubbishServer;
@@ -88,7 +88,7 @@ public class N03ClassificationAddActivity extends B01BaseActivity implements Vie
 		submit.setOnClickListener(this) ;
 		
 		TextView area = (TextView) findViewById(R.id.area) ;
-		UserInfo userInfo = UserInfoDb.INSTANCE.get() ;
+		UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
 		
 		if(userInfo == null){
 			showWarnDlg("用户登录超时，请重新登录!") ;

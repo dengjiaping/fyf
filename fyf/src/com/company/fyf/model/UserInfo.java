@@ -30,6 +30,7 @@ public class UserInfo{
 	private String islock ;
 	private String connectid ;
 	private String credit_rank ;
+	private String cookie ;
 
 //	private long localLoginTime ;
 //	private int auto = 1; //1 = 自动登录 0 = 非自动登录
@@ -233,6 +234,14 @@ public class UserInfo{
 
 	public void setCredit_rank(String credit_rank) {
 		this.credit_rank = credit_rank;
+	}
+
+	public String getCookie() {
+		return cookie;
+	}
+
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
 	}
 
 	@Override
