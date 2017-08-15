@@ -1,6 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    signingConfigs {
+        config {
+            keyAlias 'fyf'
+            keyPassword 'fenyifen'
+            storeFile file('../fyf.ks')
+            storePassword 'fenyifen'
+        }
+    }
+
     compileSdkVersion 25
     buildToolsVersion "25.0.3"
 
@@ -33,12 +43,23 @@ android {
         applicationId "com.company.fyf"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1002000
-        versionName "1.2.0"
+        versionCode 1002001
+        versionName "1.2.1"
 
         ndk {
             //设置支持的SO库架构
             abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
