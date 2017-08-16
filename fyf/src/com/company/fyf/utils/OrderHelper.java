@@ -23,7 +23,7 @@ import java.lang.ref.WeakReference;
  */
 public class OrderHelper {
 
-    private static final long TIME_INTERVAL = 20 * 1000 ;
+    private static final long TIME_INTERVAL = 5 * 60 * 1000 ;
 
     public static void mark(){
         CommPreference.INSTANCE.setOrderMark();
