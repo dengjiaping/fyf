@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.company.fyf.R;
+import com.company.fyf.db.CommPreference;
 import com.company.fyf.utils.OrderHelper;
 
 import java.lang.ref.WeakReference;
@@ -41,6 +42,8 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
         closeView = findViewById(R.id.closeView) ;
         closeView.setOnClickListener(this);
         inputEt = (EditText) findViewById(R.id.inputEt);
+        String phone = CommPreference.INSTANCE.getUserInfo().getUsername() ;
+        inputEt.setText(phone);
         submitBtn = (ImageView) findViewById(R.id.submitBtn);
         OrderHelper.checkMark(new WeakReference<>(submitBtn));
         submitBtn.setOnClickListener(this);

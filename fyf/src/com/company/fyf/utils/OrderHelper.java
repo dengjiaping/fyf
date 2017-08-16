@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.company.fyf.db.CommPreference;
 import com.company.fyf.net.ApptoolServer;
 import com.company.fyf.net.CallBack;
+import com.company.fyf.net.RubbishServer;
 
 import java.lang.ref.WeakReference;
 
@@ -52,7 +54,7 @@ public class OrderHelper {
         },delayTime) ;
     }
 
-    public static void doOrder(Context context,WeakReference<EditText> inputEtReference,WeakReference<ImageView>  submitBtnReference) {
+    public static void doOrder(final Context context,WeakReference<EditText> inputEtReference,final WeakReference<ImageView>  submitBtnReference) {
 
         EditText inputEt = inputEtReference.get() ;
         if(inputEt == null){
@@ -62,12 +64,20 @@ public class OrderHelper {
         if(!FyfUtils.doCheckPhone(context,inputValue)){
             return;
         }
-        mark() ;
-        ImageView submitBtn = submitBtnReference.get() ;
-        if(submitBtn != null) {
-            WeakReference sumitBtnReference = new WeakReference<>(submitBtn) ;
-            checkMark(sumitBtnReference) ;
-        }
+        RubbishServer rubbishServer = new RubbishServer(context) ;
+        rubbishServer.callAdd(inputValue, new CallBack<Object>() {
+            @Override
+            public void onSuccess(Object o) {
+                super.onSuccess(o);
+                mark() ;
+                ImageView submitBtn = submitBtnReference.get() ;
+                if(submitBtn != null) {
+                    WeakReference sumitBtnReference = new WeakReference<>(submitBtn) ;
+                    checkMark(sumitBtnReference) ;
+                    Toast.makeText(context, "预约成功", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public static void getManualOrdelPhonenum(final Context context,final View manualCallTipTv,final View callLL,final TextView callPhoneTv){
