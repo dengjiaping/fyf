@@ -1,12 +1,8 @@
 package com.company.fyf.utils;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -207,24 +203,24 @@ public class FyfUtils {
 		return versionName;
 	}
 
-	public static void doTelAction(final Context context) {
-		new AlertDialog.Builder(context)
-				.setTitle("温馨提示")
-				.setMessage("客服专享电话：010-87609497\n（工作日9:00-18:00）")
-				.setPositiveButton("拨打", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface arg0, int arg1) {
-						arg0.dismiss();
-						//用intent启动拨打电话
-						Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:01087609497"));
-						context.startActivity(intent);
-					}
-				})
-				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface arg0, int arg1) {
-						arg0.dismiss() ;
-					}
-				})
-				.show() ;
-	}
+//	public static void doTelAction(final Context context) {
+//		new AlertDialog.Builder(context)
+//				.setTitle("温馨提示")
+//				.setMessage("客服专享电话：010-87609497\n（工作日9:00-18:00）")
+//				.setPositiveButton("拨打", new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface arg0, int arg1) {
+//						arg0.dismiss();
+//						//用intent启动拨打电话
+//						Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:01087609497"));
+//						context.startActivity(intent);
+//					}
+//				})
+//				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//					public void onClick(DialogInterface arg0, int arg1) {
+//						arg0.dismiss() ;
+//					}
+//				})
+//				.show() ;
+//	}
 
 }

@@ -1,12 +1,18 @@
 package com.company.fyf.utils;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.company.fyf.db.CommPreference;
+import com.company.fyf.net.ApptoolServer;
+import com.company.fyf.net.CallBack;
 
 import java.lang.ref.WeakReference;
 
@@ -63,6 +69,30 @@ public class OrderHelper {
             checkMark(sumitBtnReference) ;
         }
     }
+
+    public static void getManualOrdelPhonenum(final Context context,final View manualCallTipTv,final View callLL,final TextView callPhoneTv){
+        ApptoolServer apptoolServer = new ApptoolServer() ;
+        apptoolServer.rubbishSetting(new CallBack<String>() {
+
+            @Override
+            public void onSuccess(final String s) {
+                super.onSuccess(s);
+                manualCallTipTv.setVisibility(View.VISIBLE);
+                callLL.setVisibility(View.VISIBLE);
+                callPhoneTv.setText(s);
+
+                callLL.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + s));
+						context.startActivity(intent);
+                    }
+                });
+
+            }
+        });
+    }
+
 
 
 

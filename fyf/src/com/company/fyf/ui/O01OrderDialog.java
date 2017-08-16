@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.company.fyf.R;
-import com.company.fyf.utils.FyfUtils;
 import com.company.fyf.utils.OrderHelper;
 
 import java.lang.ref.WeakReference;
@@ -21,6 +21,8 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
     private EditText inputEt;
     private ImageView submitBtn;
     private View callLL ;
+    private View manualCallTipTv;
+    private TextView callPhoneTv;
 
     public O01OrderDialog(Context context) {
         super(context);
@@ -43,8 +45,9 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
         OrderHelper.checkMark(new WeakReference<>(submitBtn));
         submitBtn.setOnClickListener(this);
         callLL = findViewById(R.id.callLL)  ;
-        callLL.setOnClickListener(this);
-
+        manualCallTipTv = findViewById(R.id.manualCallTipTv) ;
+        callPhoneTv = (TextView) findViewById(R.id.callPhoneTv);
+        OrderHelper.getManualOrdelPhonenum(getContext(),manualCallTipTv,callLL,callPhoneTv);
     }
 
     @Override
@@ -56,14 +59,14 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
             case R.id.submitBtn:
                 doOrder() ;
                 break;
-            case R.id.callLL:
-                doCall() ;
-                break;
+//            case R.id.callLL:
+//                doCall() ;
+//                break;
         }
     }
 
     private void doCall() {
-        FyfUtils.doTelAction(getContext());
+//        FyfUtils.doTelAction(getContext());
     }
 
     private void doOrder() {

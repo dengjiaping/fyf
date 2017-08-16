@@ -79,11 +79,13 @@
                 android:background="@drawable/ic_o01_line" />
 
             <TextView
+                android:id="@+id/manualCallTipTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30.67dp"
                 android:layout_marginTop="26dp"
                 android:text="或拨打下方电话直接预约"
+                android:visibility="invisible"
                 android:textColor="#535353" />
 
             <LinearLayout
@@ -93,6 +95,7 @@
                 android:layout_marginLeft="31dp"
                 android:layout_marginTop="17dp"
                 android:gravity="center_vertical"
+                android:visibility="invisible"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -101,6 +104,7 @@
                     android:src="@drawable/ic_o01_phone" />
 
                 <TextView
+                    android:id="@+id/callPhoneTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

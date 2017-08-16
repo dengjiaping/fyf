@@ -1,14 +1,6 @@
 package com.company.fyf.net;
 
-import java.util.HashMap;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
-import android.util.JsonReader;
 
 import com.alibaba.fastjson.JSON;
 import com.company.fyf.FyfApp;
@@ -21,6 +13,13 @@ import com.company.fyf.db.MemberSettingDao;
 import com.company.fyf.model.MemberSetting;
 import com.company.fyf.utils.CommConfig;
 import com.lyx.utils.CommUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class ApptoolServer extends AbstractHttpServer {
 	
@@ -183,6 +182,26 @@ public class ApptoolServer extends AbstractHttpServer {
 						back.onSuccess(null) ;
 					}
 					
+				} catch (JSONException e) {
+					e.printStackTrace();
+					showAnalyticalException(back);
+				}
+			}
+		});
+
+	}
+
+	public void rubbishSetting(final CallBack<String> back) {
+
+		addParam("act", "rubbish_setting");
+		doGet(new FilterAjaxCallBack(back) {
+			public void onSuccess(String data) {
+				try {
+					String rubbish_call_tel = new JSONObject(data).getString("rubbish_call_tel") ;
+					if(back != null){
+						back.onSuccess(rubbish_call_tel) ;
+					}
+
 				} catch (JSONException e) {
 					e.printStackTrace();
 					showAnalyticalException(back);
