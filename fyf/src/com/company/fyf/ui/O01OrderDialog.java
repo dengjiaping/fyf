@@ -25,8 +25,11 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
     private View manualCallTipTv;
     private TextView callPhoneTv;
 
+    private Context context ;
+
     public O01OrderDialog(Context context) {
         super(context);
+        this.context = context ;
     }
 
 
@@ -73,6 +76,6 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
     }
 
     private void doOrder() {
-        OrderHelper.doOrder(getContext(),new WeakReference<>(inputEt),new WeakReference<>(submitBtn));
+        OrderHelper.doOrder(context,new WeakReference<>(inputEt),new WeakReference<>(submitBtn));
     }
 }
