@@ -106,9 +106,11 @@ public class M02HomeFragment extends B02BaseFragment {
 		View click_area_recyclable = root.findViewById(R.id.click_area_recyclable) ;
 		click_area_recyclable.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Bundle param = new Bundle() ;
-				param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 2);
-				showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+//				Bundle param = new Bundle() ;
+//				param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 2);
+//				showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				O01OrderDialog o01OrderDialog = new O01OrderDialog(getActivity()) ;
+				o01OrderDialog.show();
 			}
 		}) ;
 		

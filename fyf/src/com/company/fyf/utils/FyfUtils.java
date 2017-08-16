@@ -1,8 +1,12 @@
 package com.company.fyf.utils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.text.TextUtils;
 import android.widget.Toast;
 
@@ -13,20 +17,20 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class FyfUtils {
-	
+
 	public static boolean doCheckPhone(Context context, final String phoneNum) {
-		return doCheckPhone(context,phoneNum,true);
+		return doCheckPhone(context, phoneNum, true);
 	}
 
-	public static boolean doCheckPhone(Context context, final String phoneNum,boolean toast) {
+	public static boolean doCheckPhone(Context context, final String phoneNum, boolean toast) {
 		// 校验合法性
 		if (FyfUtils.checkInputEmpty(phoneNum)) {
-			if(toast)
+			if (toast)
 				showToast(context, "手机号不能为空");
 			return false;
 		}
 		if (!RegexUtil.isMobile(phoneNum)) {
-			if(toast)
+			if (toast)
 				showToast(context, "请输入有效手机号");
 			return false;
 		}
@@ -54,7 +58,7 @@ public class FyfUtils {
 	}
 
 	public static boolean doCheckPhonePwd(Context context,
-			final String phoneNum, final String pwd) {
+										  final String phoneNum, final String pwd) {
 		return doCheckPhone(context, phoneNum) && doCheckPwd(context, pwd);
 	}
 
@@ -81,15 +85,15 @@ public class FyfUtils {
 	}
 
 	public static String ageFromBirthday(String time) {
-		
-		if(TextUtils.isEmpty(time)){
-			return "" ;
+
+		if (TextUtils.isEmpty(time)) {
+			return "";
 		}
-		
-		if("0".equals(time)){
-			return "0" ;
+
+		if ("0".equals(time)) {
+			return "0";
 		}
-		
+
 		Date birthDay = null;
 		try {
 			birthDay = new Date(Long.parseLong(time));
@@ -97,9 +101,9 @@ public class FyfUtils {
 			e.printStackTrace();
 			return "";
 		}
-		
-		if(birthDay == null){
-			return "" ;
+
+		if (birthDay == null) {
+			return "";
 		}
 
 		Calendar cal = Calendar.getInstance();
@@ -134,54 +138,54 @@ public class FyfUtils {
 
 		return age + "";
 	}
-	
-	public static String getPhpTimeTemp(String javaTimeTemp){
-		
-		if(TextUtils.isEmpty(javaTimeTemp)){
-			return "" ;
+
+	public static String getPhpTimeTemp(String javaTimeTemp) {
+
+		if (TextUtils.isEmpty(javaTimeTemp)) {
+			return "";
 		}
-		
-		return javaTimeTemp.substring(0,javaTimeTemp.length()-3) ;
+
+		return javaTimeTemp.substring(0, javaTimeTemp.length() - 3);
 	}
-	
-	public static String getJavaTimeTemp(String phpTimeTemp){
-		if(TextUtils.isEmpty(phpTimeTemp)){
-			return "" ;
+
+	public static String getJavaTimeTemp(String phpTimeTemp) {
+		if (TextUtils.isEmpty(phpTimeTemp)) {
+			return "";
 		}
-		
-		return phpTimeTemp + "000" ;
+
+		return phpTimeTemp + "000";
 	}
-	
-	public static String encryptPhone(String phone){
-		if(FyfUtils.checkInputEmpty(phone)){
-			return "" ;
+
+	public static String encryptPhone(String phone) {
+		if (FyfUtils.checkInputEmpty(phone)) {
+			return "";
 		}
-		if(phone.length() <= 3){
-			return phone ;
+		if (phone.length() <= 3) {
+			return phone;
 		}
-		StringBuilder builder = new StringBuilder(phone) ;
-		if(phone.length() == 4){
-			builder.replace(3, 4, "*") ;
-		}else if(phone.length() == 5){
-			builder.replace(3, 5, "**") ;
-		}else if(phone.length() == 6){
-			builder.replace(3, 6, "***") ;
-		}else{
-			builder.replace(3, 7, "****") ;
+		StringBuilder builder = new StringBuilder(phone);
+		if (phone.length() == 4) {
+			builder.replace(3, 4, "*");
+		} else if (phone.length() == 5) {
+			builder.replace(3, 5, "**");
+		} else if (phone.length() == 6) {
+			builder.replace(3, 6, "***");
+		} else {
+			builder.replace(3, 7, "****");
 		}
-		return builder.toString() ;
+		return builder.toString();
 	}
-	
-	public static boolean checkInputEmpty(String value){
-		if(TextUtils.isEmpty(value)){
-			return true ;
+
+	public static boolean checkInputEmpty(String value) {
+		if (TextUtils.isEmpty(value)) {
+			return true;
 		}
-		String temp = value.trim() ;
-		temp = temp.replace("\n","") ;
-		if(TextUtils.isEmpty(temp)){
-			return true ;
+		String temp = value.trim();
+		temp = temp.replace("\n", "");
+		if (TextUtils.isEmpty(temp)) {
+			return true;
 		}
-		return false ;
+		return false;
 	}
 
 	/**
@@ -201,6 +205,26 @@ public class FyfUtils {
 			versionName = "";
 		}
 		return versionName;
+	}
+
+	public static void doTelAction(final Context context) {
+		new AlertDialog.Builder(context)
+				.setTitle("温馨提示")
+				.setMessage("客服专享电话：010-87609497\n（工作日9:00-18:00）")
+				.setPositiveButton("拨打", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						arg0.dismiss();
+						//用intent启动拨打电话
+						Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:01087609497"));
+						context.startActivity(intent);
+					}
+				})
+				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						arg0.dismiss() ;
+					}
+				})
+				.show() ;
 	}
 
 }

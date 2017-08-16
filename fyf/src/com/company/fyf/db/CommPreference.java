@@ -16,6 +16,7 @@ public class CommPreference {
 	private final String KEY_POINTS_RULE = "key_points_rule" ;
 	private final String KEY_SHOULD_SHOW_GUIDE = "key_should_show_guide" ;
 	private final String KEY_USER_INFO = "key_user_info" ;
+	private final String KEY_ORDER_MARK_TIMESTAMP = "key_order_mark_timestamp" ;
 
 
 	public static CommPreference INSTANCE = new CommPreference() ;
@@ -107,6 +108,14 @@ public class CommPreference {
 			e.printStackTrace();
 			return null ;
 		}
+	}
+
+	public void setOrderMark(){
+		sp.setlong(KEY_ORDER_MARK_TIMESTAMP,System.currentTimeMillis());
+	}
+
+	public long getOrderMark(){
+		return sp.getlong(KEY_ORDER_MARK_TIMESTAMP) ;
 	}
 
 
