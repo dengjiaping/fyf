@@ -91,17 +91,27 @@ public class M02HomeFragment extends B02BaseFragment {
 		View click_area_kitchen = root.findViewById(R.id.click_area_kitchen) ;
 		click_area_kitchen.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Bundle param = new Bundle() ;
-				param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 0);
-				showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
+				if(userInfo == null){
+					showActivity(L03LoginActivity.class) ;
+				}else{
+					Bundle param = new Bundle() ;
+					param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 0);
+					showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				}
 			}
 		}) ;
 		View click_area_other = root.findViewById(R.id.click_area_other) ;
 		click_area_other.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Bundle param = new Bundle() ;
-				param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 1);
-				showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
+				if(userInfo == null){
+					showActivity(L03LoginActivity.class) ;
+				}else{
+					Bundle param = new Bundle() ;
+					param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 1);
+					showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				}
 			}
 		}) ;
 		View click_area_recyclable = root.findViewById(R.id.click_area_recyclable) ;
