@@ -10,9 +10,9 @@ import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.FinalDb;
 import net.tsz.afinal.FinalDb.DbUpdateListener;
 import net.tsz.afinal.FinalHttp;
+import net.tsz.afinal.exception.HttpException;
 
 import org.apache.http.Header;
-import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.HttpResponse;
@@ -93,22 +93,23 @@ Set-Cookie	CAPkO__nickname=325eQG8Wz7aaf7cpiNHjk_fQZ9YmbNqi1enTmU-3SQ; expires=S
 			@Override
 			public void process(HttpRequest httpRequest, HttpContext httpContext) throws HttpException, IOException {
 				Header[] headers = httpRequest.getAllHeaders();
+				String oriCookie = "" ;
+				Header cookieHeader = null ;
 				if(headers != null || headers.length > 0) {
 					for (int i = 0; i < headers.length; i++) {
 						String headName = headers[i].getName() ;
-						if(!"Set-Cookie".equals(headName)){
+						if(!"Cookie".equals(headName)){
 							continue;
 						}
-						String cookieString = headers[i].getValue() ;
-						if(cookieString.contains("CAPkO_auth")
-								|| cookieString.contains("CAPkO__userid")
-								|| cookieString.contains("CAPkO__username")
-								|| cookieString.contains("CAPkO__groupid")
-								|| cookieString.contains("CAPkO__nickname")){
-							httpRequest.removeHeader(headers[i]);
-						}
+						oriCookie = headers[i].getValue() ;
+						cookieHeader = headers[i];
 					}
 				}
+
+				if(oriCookie != null && oriCookie.contains("CAPkO_auth")){
+					return;
+				}
+				httpRequest.removeHeader(cookieHeader);
 				String cookie = CommPreference.INSTANCE.getUserCookie() ;
 				if(TextUtils.isEmpty(cookie)){
 					return;
@@ -117,10 +118,15 @@ Set-Cookie	CAPkO__nickname=325eQG8Wz7aaf7cpiNHjk_fQZ9YmbNqi1enTmU-3SQ; expires=S
 				if(cookies == null || cookies.length <= 0){
 					return;
 				}
+				StringBuilder cookieBuilder = new StringBuilder(oriCookie) ;
 				for (int i = 0; i < cookies.length; i++) {
 					if(TextUtils.isEmpty(cookies[i])) continue;
-					httpRequest.addHeader("Set-Cookie", cookies[i]);
+					if(cookieBuilder.length() > 0)
+						cookieBuilder.append(";") ;
+					cookieBuilder.append(cookies[i]) ;
 				}
+				cookieBuilder.deleteCharAt(cookieBuilder.length() - 1) ;
+				httpRequest.addHeader("Cookie", cookieBuilder.toString());
 			}
 		});
 	}
