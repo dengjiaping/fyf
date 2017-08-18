@@ -158,6 +158,7 @@ public class T01SetupIndexActivity extends B01BaseActivity implements View.OnCli
 	
 	private void doLogoutAction() {
 		CommPreference.INSTANCE.clearUserInfo();
+		CommPreference.INSTANCE.setUserCookie("");
 		new MemberServer().logout(null) ;
 		finish() ;
 	}

@@ -16,6 +16,7 @@ public class CommPreference {
 	private final String KEY_POINTS_RULE = "key_points_rule" ;
 	private final String KEY_SHOULD_SHOW_GUIDE = "key_should_show_guide" ;
 	private final String KEY_USER_INFO = "key_user_info" ;
+	private final String KEY_USER_COOKIE = "key_user_cookie" ;
 	private final String KEY_ORDER_MARK_TIMESTAMP = "key_order_mark_timestamp" ;
 
 
@@ -79,6 +80,7 @@ public class CommPreference {
 
 		if(userInfo == null){
 			clearUserInfo();
+			setUserCookie("");
 			return;
 		}
 
@@ -108,6 +110,15 @@ public class CommPreference {
 			e.printStackTrace();
 			return null ;
 		}
+	}
+
+	public String getUserCookie(){
+		String s = sp.getString(KEY_USER_COOKIE) ;
+		return s ;
+	}
+
+	public void setUserCookie(String cookie){
+		sp.setString(KEY_USER_COOKIE,cookie);
 	}
 
 	public void setOrderMark(){
