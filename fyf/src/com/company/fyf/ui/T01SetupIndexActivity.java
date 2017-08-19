@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.company.fyf.R;
 import com.company.fyf.dao.UpdateinfoVo;
@@ -85,8 +86,13 @@ public class T01SetupIndexActivity extends B01BaseActivity implements View.OnCli
 			public void onClick(DialogInterface arg0, int arg1) {
 				arg0.dismiss() ;
 				 //用intent启动拨打电话  
-		        Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:01087609497"));  
-		        startActivity(intent);  	
+				try {
+					Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse("tel:01087609497"));
+					startActivity(intent);
+				} catch (SecurityException e) {
+					e.printStackTrace();
+					Toast.makeText(T01SetupIndexActivity.this,"请设置电话权限",Toast.LENGTH_SHORT).show();
+				}
 			}
 		})
 		.setNegativeButton("取消", new DialogInterface.OnClickListener() {

@@ -94,8 +94,13 @@ public class OrderHelper {
                 callLL.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + s));
-						context.startActivity(intent);
+                        try {
+                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + s));
+                            context.startActivity(intent);
+                        } catch (SecurityException e) {
+                            e.printStackTrace();
+                            Toast.makeText(context,"请设置电话权限",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 
