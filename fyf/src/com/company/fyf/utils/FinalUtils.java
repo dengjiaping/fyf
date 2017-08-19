@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import com.company.fyf.db.CommPreference;
+import com.company.fyf.model.AuthCookie;
 
 import net.tsz.afinal.FinalBitmap;
 import net.tsz.afinal.FinalDb;
@@ -31,7 +32,6 @@ public class FinalUtils {
 	public static void init(Context ctx){
 		finalBitmap = FinalBitmap.create(ctx) ;
 		initHttpClient() ;
-//		finalHttp.configCookieStore(cookieStore) ;
 		db = FinalDb.create(ctx, null, CommConfig.DB_NAME,CommConfig.DEBUG, CommConfig.DBVERSION, new DbUpdateListener() {
 			public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
 			}
@@ -58,34 +58,28 @@ public class FinalUtils {
 			public void process(HttpResponse response, HttpContext context) {
 				Header[] headers = response.getAllHeaders();
 				if(headers != null || headers.length > 0) {
-					StringBuilder cookie = new StringBuilder() ;
+					AuthCookie authCookie = CommPreference.INSTANCE.getUserCookie();
+					if(authCookie == null) authCookie = new AuthCookie() ;
 					for (int i = 0; i < headers.length; i++) {
-						/*
-						Set-Cookie	CAPkO_auth=1daaJQDaZPsDxZyl9mLGFrQGLPZA-NF6PpUKvEfzCB-wY15TqqkTb3tRB9NC5FWgElYkwnQbksTE0bGF5UkspHoD01YVBbMGg2UwF41iLXWnuR694F1e_-QKmyAzIE_JWm1ZotGj3P3QRi7wOmm2CFdyxOVI; expires=Sun, 17-Sep-2017 10:38:45 GMT
-Set-Cookie	CAPkO__userid=ac026cdAV4k8dC3S3iRr3txEmdNk4KgO6nL9GQ1LLg-c; expires=Sun, 17-Sep-2017 10:38:45 GMT
-Set-Cookie	CAPkO__username=937dyOV0wRk11p_EWY4VIWHsMwEc5ylNt-V4jAu5VCqhYF-TswsxXw; expires=Sun, 17-Sep-2017 10:38:45 GMT
-Set-Cookie	CAPkO__groupid=b3755gAx-AihPPZh9mNtIGQq0p_xqkz3t1-vxBT9; expires=Sun, 17-Sep-2017 10:38:45 GMT
-Set-Cookie	CAPkO__nickname=325eQG8Wz7aaf7cpiNHjk_fQZ9YmbNqi1enTmU-3SQ; expires=Sun, 17-Sep-2017 10:38:45 GMT
-						 */
 						String headName = headers[i].getName() ;
 						if(!"Set-Cookie".equals(headName)){
 							continue;
 						}
 						String cookieString = headers[i].getValue() ;
-						if(cookieString.contains("CAPkO_auth")
-								|| cookieString.contains("CAPkO__userid")
-								|| cookieString.contains("CAPkO__username")
-								|| cookieString.contains("CAPkO__groupid")
-								|| cookieString.contains("CAPkO__nickname")){
-							cookie.append(cookieString) ;
-							cookie.append("&divide&") ;
+						if(cookieString.contains("CAPkO_auth")){
+							authCookie.setAuth(cookieString);
+						}else if(cookieString.contains("CAPkO__userid")){
+							authCookie.setUserid(cookieString);
+						}else if(cookieString.contains("CAPkO__username")){
+							authCookie.setUsername(cookieString);
+						}else if(cookieString.contains("CAPkO__groupid")){
+							authCookie.setGroupid(cookieString);
+						}else if(cookieString.contains("CAPkO__nickname")){
+							authCookie.setNickname(cookieString);
 						}
 					}
-					if(cookie.length() <= 0) return;
-					int start = cookie.lastIndexOf("&divide&") ;
-					int end = cookie.length();
-					cookie.delete(start,end) ;
-					CommPreference.INSTANCE.setUserCookie(cookie.toString());
+					Logger.d("setUserCookie","set authCookie : " + authCookie);
+					CommPreference.INSTANCE.setUserCookie(authCookie);
 				}
 			}
 		});
@@ -110,22 +104,34 @@ Set-Cookie	CAPkO__nickname=325eQG8Wz7aaf7cpiNHjk_fQZ9YmbNqi1enTmU-3SQ; expires=S
 					return;
 				}
 				httpRequest.removeHeader(cookieHeader);
-				String cookie = CommPreference.INSTANCE.getUserCookie() ;
-				if(TextUtils.isEmpty(cookie)){
-					return;
-				}
-				String[] cookies = cookie.split("\\&divide\\&") ;
-				if(cookies == null || cookies.length <= 0){
+				AuthCookie authCookie = CommPreference.INSTANCE.getUserCookie() ;
+				if(authCookie == null){
 					return;
 				}
 				StringBuilder cookieBuilder = new StringBuilder(oriCookie) ;
-				for (int i = 0; i < cookies.length; i++) {
-					if(TextUtils.isEmpty(cookies[i])) continue;
-					if(cookieBuilder.length() > 0)
-						cookieBuilder.append(";") ;
-					cookieBuilder.append(cookies[i]) ;
+				if(cookieBuilder.length() > 0)
+					cookieBuilder.append(";");
+				if(!TextUtils.isEmpty(authCookie.getAuth())){
+					cookieBuilder.append(authCookie.getAuth()) ;
+					cookieBuilder.append(";");
 				}
-				cookieBuilder.deleteCharAt(cookieBuilder.length() - 1) ;
+				if(!TextUtils.isEmpty(authCookie.getGroupid())){
+					cookieBuilder.append(authCookie.getGroupid()) ;
+					cookieBuilder.append(";");
+				}
+				if(!TextUtils.isEmpty(authCookie.getNickname())){
+					cookieBuilder.append(authCookie.getNickname()) ;
+					cookieBuilder.append(";");
+				}
+				if(!TextUtils.isEmpty(authCookie.getUserid())){
+					cookieBuilder.append(authCookie.getUserid()) ;
+					cookieBuilder.append(";");
+				}
+				if(!TextUtils.isEmpty(authCookie.getUsername())){
+					cookieBuilder.append(authCookie.getUsername()) ;
+					cookieBuilder.append(";");
+				}
+				Logger.d("setUserCookie","cookieBuilder ： " + cookieBuilder);
 				httpRequest.addHeader("Cookie", cookieBuilder.toString());
 			}
 		});

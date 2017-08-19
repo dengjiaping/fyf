@@ -131,18 +131,16 @@ public abstract class AbstractHttpServer {
 				
 				if(1 == success){
 					JSONObject result = jsonObject.getJSONObject("result") ;
-					
 					callBack.onSuccess(result.toString()) ;
 				}else{
-
 					JSONObject msg = jsonObject.getJSONObject("message") ;
-					
 					String error_msg = msg.getString("error_msg") ;
 					if("user_not_login".equals(error_msg)
 							||"login_status_change_please_login".equals(error_msg)
 							||"login_other_device_please_login".equals(error_msg)){
 						CommPreference.INSTANCE.clearUserInfo();
-						CommPreference.INSTANCE.setUserCookie("");
+						Logger.d("setUserCookie","server not login");
+						CommPreference.INSTANCE.setUserCookie(null);
 					}
 
 					if (callBack != null) {

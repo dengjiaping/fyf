@@ -4,10 +4,12 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.company.fyf.model.AuthCookie;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.notify.KeyList;
 import com.company.fyf.notify.NotifyCenter;
 import com.company.fyf.utils.CommConfig;
+import com.company.fyf.utils.Logger;
 import com.lyx.utils.SharedPreferencesUtils;
 
 public class CommPreference {
@@ -80,7 +82,8 @@ public class CommPreference {
 
 		if(userInfo == null){
 			clearUserInfo();
-			setUserCookie("");
+			Logger.d("setUserCookie","updateUserInfo when userinfo is null");
+			setUserCookie(null);
 			return;
 		}
 
@@ -112,13 +115,20 @@ public class CommPreference {
 		}
 	}
 
-	public String getUserCookie(){
+	public AuthCookie getUserCookie(){
 		String s = sp.getString(KEY_USER_COOKIE) ;
-		return s ;
+		if(TextUtils.isEmpty(s)){
+			return null ;
+		}
+		return JSON.parseObject(s,AuthCookie.class) ;
 	}
 
-	public void setUserCookie(String cookie){
-		sp.setString(KEY_USER_COOKIE,cookie);
+	public void setUserCookie(AuthCookie cookie){
+		if(cookie == null){
+			sp.setString(KEY_USER_COOKIE,"");
+			return;
+		}
+		sp.setString(KEY_USER_COOKIE,JSON.toJSONString(cookie));
 	}
 
 	public void setOrderMark(){

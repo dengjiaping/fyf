@@ -17,6 +17,7 @@ import com.company.fyf.net.CallBack;
 import com.company.fyf.net.MemberServer;
 import com.company.fyf.utils.CommConfig;
 import com.company.fyf.utils.FinalUtils;
+import com.company.fyf.utils.Logger;
 import com.lyx.utils.CommUtil;
 
 import net.tsz.afinal.FinalHttp;
@@ -157,8 +158,10 @@ public class T01SetupIndexActivity extends B01BaseActivity implements View.OnCli
 	}
 	
 	private void doLogoutAction() {
+
 		CommPreference.INSTANCE.clearUserInfo();
-		CommPreference.INSTANCE.setUserCookie("");
+		Logger.d("setUserCookie","doLogoutAction");
+		CommPreference.INSTANCE.setUserCookie(null);
 		new MemberServer().logout(null) ;
 		finish() ;
 	}
