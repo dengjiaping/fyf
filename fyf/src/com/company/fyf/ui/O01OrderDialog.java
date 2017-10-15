@@ -1,6 +1,7 @@
 package com.company.fyf.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
 
     private View closeView;
     private EditText inputEt;
-    private ImageView submitBtn;
+    private ImageView submitBtn,btnCkdh;
     private View callLL ;
     private View manualCallTipTv;
     private TextView callPhoneTv;
@@ -45,6 +46,8 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
         closeView = findViewById(R.id.closeView) ;
         closeView.setOnClickListener(this);
         inputEt = (EditText) findViewById(R.id.inputEt);
+        btnCkdh = (ImageView) findViewById(R.id.btnCkdh);
+        btnCkdh.setOnClickListener(this);
         String phone = CommPreference.INSTANCE.getUserInfo().getUsername() ;
         inputEt.setText(phone);
         submitBtn = (ImageView) findViewById(R.id.submitBtn);
@@ -53,7 +56,7 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
         callLL = findViewById(R.id.callLL)  ;
         manualCallTipTv = findViewById(R.id.manualCallTipTv) ;
         callPhoneTv = (TextView) findViewById(R.id.callPhoneTv);
-        OrderHelper.getManualOrdelPhonenum(getContext(),manualCallTipTv,callLL,callPhoneTv);
+        OrderHelper.getManualOrdelPhonenum(getContext(),manualCallTipTv,callLL,callPhoneTv,null);
     }
 
     @Override
@@ -65,14 +68,20 @@ public class O01OrderDialog extends B03BaseDialog implements View.OnClickListene
             case R.id.submitBtn:
                 doOrder() ;
                 break;
-//            case R.id.callLL:
-//                doCall() ;
-//                break;
+            case R.id.btnCkdh:
+                ckdh() ;
+                break;
         }
     }
 
-    private void doCall() {
-//        FyfUtils.doTelAction(getContext());
+    private void ckdh() {
+        Bundle param = new Bundle() ;
+        param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 2);
+        Intent intent = new Intent();
+        intent.putExtras(param);
+        intent.setClass(context, F01DiffRecoveryDetailActivity.class);
+        context.startActivity(intent);
+        dismiss();
     }
 
     private void doOrder() {

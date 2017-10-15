@@ -61,6 +61,7 @@ public class F01DiffRecoveryDetailActivity extends B01BaseActivity {
 //				textView.setText(getString(R.string.recoverable_description)) ;
 				v = LayoutInflater.from(this).inflate(R.layout.i_f01_viewpager_order, null) ;
 				final EditText inputEt = (EditText) v.findViewById(R.id.inputEt);
+				final ImageView priceImage = (ImageView) v.findViewById(R.id.pricePic);
 				String phone = CommPreference.INSTANCE.getUserInfo().getUsername() ;
 				inputEt.setText(phone);
 				final ImageView submitBtn = (ImageView) v.findViewById(R.id.submitBtn);
@@ -74,7 +75,7 @@ public class F01DiffRecoveryDetailActivity extends B01BaseActivity {
 				View callLL = v.findViewById(R.id.callLL)  ;
 				View manualCallTipTv = v.findViewById(R.id.manualCallTipTv) ;
 				TextView callPhoneTv = (TextView) v.findViewById(R.id.callPhoneTv);
-				OrderHelper.getManualOrdelPhonenum(this,manualCallTipTv,callLL,callPhoneTv);
+				OrderHelper.getManualOrdelPhonenum(this,manualCallTipTv,callLL,callPhoneTv,priceImage);
 
 			}
 			mViews.add(v) ;

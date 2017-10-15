@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,6 +16,7 @@ import com.company.fyf.db.CommPreference;
 import com.company.fyf.net.ApptoolServer;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.net.RubbishServer;
+import com.lyx.utils.ImageLoaderUtils;
 
 import java.lang.ref.WeakReference;
 
@@ -80,22 +82,34 @@ public class OrderHelper {
         });
     }
 
-    public static void getManualOrdelPhonenum(final Context context,final View manualCallTipTv,final View callLL,final TextView callPhoneTv){
+    public static void getManualOrdelPhonenum(final Context context,final View manualCallTipTv,final View callLL,final TextView callPhoneTv,final ImageView priceImage){
         ApptoolServer apptoolServer = new ApptoolServer() ;
         apptoolServer.rubbishSetting(new CallBack<String>() {
 
             @Override
             public void onSuccess(final String s) {
                 super.onSuccess(s);
+                if(TextUtils.isEmpty(s)){
+                    return;
+                }
+                String[] strings = s.split("\\$divide\\$");
+
+                final String tel = strings[0] ;
+                final String pricePicurl = strings[1];
+
+                if(priceImage != null && !TextUtils.isEmpty(pricePicurl)){
+                    ImageLoaderUtils.displayPicWithAutoStretch(pricePicurl,priceImage);
+                }
+
                 manualCallTipTv.setVisibility(View.VISIBLE);
                 callLL.setVisibility(View.VISIBLE);
-                callPhoneTv.setText(s);
+                callPhoneTv.setText(tel);
 
                 callLL.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         try {
-                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + s));
+                            Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + tel));
                             context.startActivity(intent);
                         } catch (SecurityException e) {
                             e.printStackTrace();

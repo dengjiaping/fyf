@@ -67,6 +67,14 @@
                 android:textColor="#7bae51"
                 android:textSize="14.33dp" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/pricePic"
+            android:layout_width="match_parent"
+            android:layout_margin="50dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"/>
+
     </LinearLayout>
 
 </ScrollView>
