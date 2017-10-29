@@ -71,10 +71,23 @@
         <ImageView
             android:id="@+id/pricePic"
             android:layout_width="match_parent"
-            android:layout_margin="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
+            android:src="@drawable/bg_f01_iv_pirce_desc"
             android:scaleType="fitXY"/>
-
+        <LinearLayout
+            android:id="@+id/priceList"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:orientation="vertical">
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

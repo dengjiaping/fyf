@@ -2,21 +2,30 @@ package com.company.fyf.utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
+import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.company.fyf.R;
 import com.company.fyf.db.CommPreference;
 import com.company.fyf.net.ApptoolServer;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.net.RubbishServer;
 import com.lyx.utils.ImageLoaderUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 
@@ -78,6 +87,68 @@ public class OrderHelper {
                     checkMark(sumitBtnReference) ;
                     Toast.makeText(context, "预约成功", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+    }
+
+    public static void getManualOrdelPhonenum(final Context context, final View manualCallTipTv, final View callLL, final TextView callPhoneTv, final ImageView priceImage, final LinearLayout priceList){
+        ApptoolServer apptoolServer = new ApptoolServer() ;
+        apptoolServer.rubbishSetting2(new CallBack<JSONObject>() {
+
+            @Override
+            public void onSuccess(final JSONObject jsonObject) {
+                super.onSuccess(jsonObject);
+
+                try {
+                    final String tel = jsonObject.getString("rubbish_call_tel") ;
+                    final String pricePicurl = jsonObject.getString("rubbish_call_price_picurl") ;
+                    final JSONArray priceArray = jsonObject.getJSONArray("rubbish_call_price") ;
+
+                    priceImage.setVisibility(View.VISIBLE);
+                    if(priceImage != null && !TextUtils.isEmpty(pricePicurl)){
+                        ImageLoaderUtils.displayPicWithAutoStretch(pricePicurl,priceImage);
+                    }
+
+                    manualCallTipTv.setVisibility(View.VISIBLE);
+                    callLL.setVisibility(View.VISIBLE);
+                    priceList.setVisibility(View.VISIBLE);
+                    callPhoneTv.setText(tel);
+
+                    for (int i = 0;i < priceArray.length(); i++){
+                        LinearLayout view = (LinearLayout) LayoutInflater.from(context).inflate(R.layout.i_f01_viewpager_order_ll_price, priceList, true);
+                        view = (LinearLayout) view.getChildAt(i);
+                        JSONObject o = priceArray.getJSONObject(i) ;
+                        String name = o.getString("name");
+                        String price = o.getString("price") + "/" + o.getString("unit") ;
+                        TextView nameView = (TextView) view.getChildAt(0);
+                        nameView.setText(name);
+                        TextView priceView = (TextView) view.getChildAt(1);
+                        priceView.setText(price);
+                    }
+
+                    TextView remarkView = new TextView(context) ;
+                    remarkView.setText("备注：以当天市场回收价格为准");
+                    remarkView.setTextColor(Color.rgb(160,160,160));
+                    remarkView.setTextSize(TypedValue.COMPLEX_UNIT_DIP,12);
+                    remarkView.setPadding(0,5,0,0);
+                    priceList.addView(remarkView);
+
+                    callLL.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + tel));
+                                context.startActivity(intent);
+                            } catch (SecurityException e) {
+                                e.printStackTrace();
+                                Toast.makeText(context,"请设置电话权限",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }

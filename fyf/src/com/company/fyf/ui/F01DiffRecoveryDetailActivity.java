@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -62,6 +63,7 @@ public class F01DiffRecoveryDetailActivity extends B01BaseActivity {
 				v = LayoutInflater.from(this).inflate(R.layout.i_f01_viewpager_order, null) ;
 				final EditText inputEt = (EditText) v.findViewById(R.id.inputEt);
 				final ImageView priceImage = (ImageView) v.findViewById(R.id.pricePic);
+				final LinearLayout priceList = (LinearLayout) v.findViewById(R.id.priceList);
 				String phone = CommPreference.INSTANCE.getUserInfo().getUsername() ;
 				inputEt.setText(phone);
 				final ImageView submitBtn = (ImageView) v.findViewById(R.id.submitBtn);
@@ -75,7 +77,7 @@ public class F01DiffRecoveryDetailActivity extends B01BaseActivity {
 				View callLL = v.findViewById(R.id.callLL)  ;
 				View manualCallTipTv = v.findViewById(R.id.manualCallTipTv) ;
 				TextView callPhoneTv = (TextView) v.findViewById(R.id.callPhoneTv);
-				OrderHelper.getManualOrdelPhonenum(this,manualCallTipTv,callLL,callPhoneTv,priceImage);
+				OrderHelper.getManualOrdelPhonenum(this,manualCallTipTv,callLL,callPhoneTv,priceImage,priceList);
 
 			}
 			mViews.add(v) ;

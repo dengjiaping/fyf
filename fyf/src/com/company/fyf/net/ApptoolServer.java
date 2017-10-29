@@ -193,17 +193,33 @@ public class ApptoolServer extends AbstractHttpServer {
 
 	public void rubbishSetting(final CallBack<String> back) {
 
+		rubbishSetting2(new CallBack<JSONObject>() {
+			@Override
+			public void onSuccess(JSONObject jsonObject) {
+				super.onSuccess(jsonObject);
+				try {
+					String rubbish_call_tel = jsonObject.getString("rubbish_call_tel") ;
+					String rubbish_call_price_picurl = jsonObject.getString("rubbish_call_price_picurl") ;
+					if(back != null){
+                        back.onSuccess(rubbish_call_tel + "$divide$" + rubbish_call_price_picurl) ;
+                    }
+				} catch (JSONException e) {
+					e.printStackTrace();
+					showAnalyticalException(back);
+				}
+			}
+		});
+	}
+
+	public void rubbishSetting2(final CallBack<JSONObject> back) {
 		addParam("act", "rubbish_setting");
 		doGet(new FilterAjaxCallBack(back) {
 			public void onSuccess(String data) {
 				try {
 					JSONObject jsonObject = new JSONObject(data);
-					String rubbish_call_tel = jsonObject.getString("rubbish_call_tel") ;
-					String rubbish_call_price_picurl = jsonObject.getString("rubbish_call_price_picurl") ;
 					if(back != null){
-						back.onSuccess(rubbish_call_tel + "$divide$" + rubbish_call_price_picurl) ;
+						back.onSuccess(jsonObject) ;
 					}
-
 				} catch (JSONException e) {
 					e.printStackTrace();
 					showAnalyticalException(back);

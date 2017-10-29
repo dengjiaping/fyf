@@ -45,8 +45,8 @@ android {
         applicationId "com.company.fyf"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 1003000
-        versionName "1.3.0"
+        versionCode 1003002
+        versionName "1.3.2"
 
         ndk {
             //设置支持的SO库架构
