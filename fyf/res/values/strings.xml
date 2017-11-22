@@ -5,7 +5,8 @@
     <string name="recovery_type_kitchen">厨余类</string>
     <string name="recovery_type_other">其他类</string>
     <string name="recovery_type_recoverable">可回收类</string>
-    
+    <string name="recovery_type_order">预约回收</string>
+
     <string name="kitchen_description">厨房产生的食物类垃圾以及果皮等。\n\n主要包括：\n\t剩菜剩饭与西餐糕点等食物残余、菜梗菜叶、动物骨骼内脏、茶叶渣、水果残余、果壳瓜皮、盆景等植物的残枝落叶、废弃食用油等。</string>
     <string name="recoverable_description">再生利用价值较高，能进入废品回收渠道的垃圾。\n\n主要包括：\n\t纸类（报纸、传单、杂志、旧书、纸板箱及其它未受污染的纸制品等）、金属（铁、铜、铝等制品）、玻璃（玻璃瓶罐、平板玻璃及其他玻璃制品）、除塑料袋外的塑料制品（泡沫塑料、塑料瓶、硬塑料等）、橡胶及橡胶制品、牛奶盒等利乐包装、饮料瓶（可乐罐、塑料饮料瓶、啤酒瓶等）等。</string>
     <string name="other_description">除去可回收垃圾、有害垃圾、厨房垃圾之外的所有垃圾的总称。\n\n主要包括：\n\t受污染与无法再生的纸张（纸杯、照片、复写纸、压敏纸、收据用纸、明信片、相册、卫生纸、尿片等）、受污染或其他不可回收的玻璃、塑料袋与其他受污染的塑料制品、废旧衣物与其他纺织品、破旧陶瓷品、妇女卫生用品、一次性餐具、贝壳、烟头、灰土等。</string>

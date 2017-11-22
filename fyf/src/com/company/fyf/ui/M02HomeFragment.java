@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.company.fyf.R;
 import com.company.fyf.dao.BannerVo;
 import com.company.fyf.db.CommPreference;
+import com.company.fyf.model.UserInfo;
 import com.company.fyf.net.ApptoolServer;
 import com.company.fyf.net.CallBack;
 import com.company.fyf.notify.IMsg;
@@ -90,25 +91,39 @@ public class M02HomeFragment extends B02BaseFragment {
 		View click_area_kitchen = root.findViewById(R.id.click_area_kitchen) ;
 		click_area_kitchen.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Bundle param = new Bundle() ;
-				param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 0);
-				showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
+				if(userInfo == null){
+					showActivity(L03LoginActivity.class) ;
+				}else{
+					Bundle param = new Bundle() ;
+					param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 0);
+					showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				}
 			}
 		}) ;
 		View click_area_other = root.findViewById(R.id.click_area_other) ;
 		click_area_other.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Bundle param = new Bundle() ;
-				param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 1);
-				showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
+				if(userInfo == null){
+					showActivity(L03LoginActivity.class) ;
+				}else{
+					Bundle param = new Bundle() ;
+					param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 1);
+					showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				}
 			}
 		}) ;
 		View click_area_recyclable = root.findViewById(R.id.click_area_recyclable) ;
 		click_area_recyclable.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				Bundle param = new Bundle() ;
-				param.putInt(F01DiffRecoveryDetailActivity.PARAM_INT_POSITION, 2);
-				showActivity(F01DiffRecoveryDetailActivity.class,param) ;
+				UserInfo userInfo = CommPreference.INSTANCE.getUserInfo();
+				if(userInfo == null){
+					showActivity(L03LoginActivity.class) ;
+				}else{
+					O01OrderDialog o01OrderDialog = new O01OrderDialog(getActivity()) ;
+					o01OrderDialog.show();
+				}
 			}
 		}) ;
 		

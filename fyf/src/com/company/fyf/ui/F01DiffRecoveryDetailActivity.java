@@ -1,19 +1,24 @@
 package com.company.fyf.ui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.company.fyf.R;
+import com.company.fyf.db.CommPreference;
+import com.company.fyf.utils.OrderHelper;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 public class F01DiffRecoveryDetailActivity extends B01BaseActivity {
 	
@@ -52,9 +57,28 @@ public class F01DiffRecoveryDetailActivity extends B01BaseActivity {
 				imageView.setBackgroundColor(getResources().getColor(R.color.theme_other));
 				textView.setText(getString(R.string.other_description)) ;
 			}else if(i == 2){
-				imageView.setImageResource(R.drawable.ic_f01_iv_recyclable);
-				imageView.setBackgroundColor(getResources().getColor(R.color.theme_recyclable));
-				textView.setText(getString(R.string.recoverable_description)) ;
+//				imageView.setImageResource(R.drawable.ic_f01_iv_recyclable);
+//				imageView.setBackgroundColor(getResources().getColor(R.color.theme_recyclable));
+//				textView.setText(getString(R.string.recoverable_description)) ;
+				v = LayoutInflater.from(this).inflate(R.layout.i_f01_viewpager_order, null) ;
+				final EditText inputEt = (EditText) v.findViewById(R.id.inputEt);
+				final ImageView priceImage = (ImageView) v.findViewById(R.id.pricePic);
+				final LinearLayout priceList = (LinearLayout) v.findViewById(R.id.priceList);
+				String phone = CommPreference.INSTANCE.getUserInfo().getUsername() ;
+				inputEt.setText(phone);
+				final ImageView submitBtn = (ImageView) v.findViewById(R.id.submitBtn);
+				OrderHelper.checkMark(new WeakReference<>(submitBtn));
+				submitBtn.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						OrderHelper.doOrder(F01DiffRecoveryDetailActivity.this,new WeakReference<>(inputEt),new WeakReference<>(submitBtn));
+					}
+				});
+				View callLL = v.findViewById(R.id.callLL)  ;
+				View manualCallTipTv = v.findViewById(R.id.manualCallTipTv) ;
+				TextView callPhoneTv = (TextView) v.findViewById(R.id.callPhoneTv);
+				OrderHelper.getManualOrdelPhonenum(this,manualCallTipTv,callLL,callPhoneTv,priceImage,priceList);
+
 			}
 			mViews.add(v) ;
 		}

@@ -4,10 +4,12 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.company.fyf.model.AuthCookie;
 import com.company.fyf.model.UserInfo;
 import com.company.fyf.notify.KeyList;
 import com.company.fyf.notify.NotifyCenter;
 import com.company.fyf.utils.CommConfig;
+import com.company.fyf.utils.Logger;
 import com.lyx.utils.SharedPreferencesUtils;
 
 public class CommPreference {
@@ -16,6 +18,8 @@ public class CommPreference {
 	private final String KEY_POINTS_RULE = "key_points_rule" ;
 	private final String KEY_SHOULD_SHOW_GUIDE = "key_should_show_guide" ;
 	private final String KEY_USER_INFO = "key_user_info" ;
+	private final String KEY_USER_COOKIE = "key_user_cookie" ;
+	private final String KEY_ORDER_MARK_TIMESTAMP = "key_order_mark_timestamp" ;
 
 
 	public static CommPreference INSTANCE = new CommPreference() ;
@@ -78,6 +82,8 @@ public class CommPreference {
 
 		if(userInfo == null){
 			clearUserInfo();
+			Logger.d("setUserCookie","updateUserInfo when userinfo is null");
+			setUserCookie(null);
 			return;
 		}
 
@@ -107,6 +113,30 @@ public class CommPreference {
 			e.printStackTrace();
 			return null ;
 		}
+	}
+
+	public AuthCookie getUserCookie(){
+		String s = sp.getString(KEY_USER_COOKIE) ;
+		if(TextUtils.isEmpty(s)){
+			return null ;
+		}
+		return JSON.parseObject(s,AuthCookie.class) ;
+	}
+
+	public void setUserCookie(AuthCookie cookie){
+		if(cookie == null){
+			sp.setString(KEY_USER_COOKIE,"");
+			return;
+		}
+		sp.setString(KEY_USER_COOKIE,JSON.toJSONString(cookie));
+	}
+
+	public void setOrderMark(){
+		sp.setlong(KEY_ORDER_MARK_TIMESTAMP,System.currentTimeMillis());
+	}
+
+	public long getOrderMark(){
+		return sp.getlong(KEY_ORDER_MARK_TIMESTAMP) ;
 	}
 
 

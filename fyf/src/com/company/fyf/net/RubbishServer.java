@@ -125,4 +125,15 @@ public class RubbishServer extends AbstractHttpServer {
 		
 	}
 
+	public void callAdd(String mobile,final CallBack<Object> callback){
+		addParam("act", "callAdd") ;
+		addParam("mobile", mobile) ;
+		doPost(new FilterAjaxCallBack(callback) {
+			@Override
+			public void onSuccess(String data) {
+				if(callback != null) callback.onSuccess(null);
+			}
+		});
+	}
+
 }

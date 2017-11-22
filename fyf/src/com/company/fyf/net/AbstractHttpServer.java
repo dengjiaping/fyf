@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import android.view.View;
 
 import com.company.fyf.db.CommPreference;
-import com.company.fyf.model.UserInfo;
 import com.company.fyf.utils.CommConfig;
 import com.company.fyf.utils.FinalUtils;
 import com.company.fyf.utils.FyfUtils;
@@ -41,15 +40,11 @@ public abstract class AbstractHttpServer {
 	private Object[] track = new Object[2] ;
 
 	public AbstractHttpServer() {
-		// TODO Auto-generated constructor stub
 		this(null);
 	}
 
 	public AbstractHttpServer(Context context) {
-		// TODO Auto-generated constructor stub
 		this.httpHelper = FinalUtils.getHttpHelper();
-
-		setCookie();
 
 		this.params = new AjaxParams();
 		this.params.put("module", getModule());
@@ -70,20 +65,6 @@ public abstract class AbstractHttpServer {
 			}) ;
 		}
 		this.context = context;
-	}
-
-	private void setCookie() {
-
-		UserInfo userInfo = CommPreference.INSTANCE.getUserInfo() ;
-
-		if(userInfo == null){
-			return;
-		}
-
-		String cookie = userInfo.getCookie() ;
-		if(!TextUtils.isEmpty(cookie)){
-			this.httpHelper.addHeader("Cookie", cookie);
-		}
 	}
 
 	private void doRetry() {
@@ -150,17 +131,16 @@ public abstract class AbstractHttpServer {
 				
 				if(1 == success){
 					JSONObject result = jsonObject.getJSONObject("result") ;
-					
 					callBack.onSuccess(result.toString()) ;
 				}else{
-
 					JSONObject msg = jsonObject.getJSONObject("message") ;
-					
 					String error_msg = msg.getString("error_msg") ;
 					if("user_not_login".equals(error_msg)
 							||"login_status_change_please_login".equals(error_msg)
 							||"login_other_device_please_login".equals(error_msg)){
 						CommPreference.INSTANCE.clearUserInfo();
+						Logger.d("setUserCookie","server not login");
+						CommPreference.INSTANCE.setUserCookie(null);
 					}
 
 					if (callBack != null) {

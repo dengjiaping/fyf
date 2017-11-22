@@ -1,14 +1,6 @@
 package com.company.fyf.net;
 
-import java.util.HashMap;
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
-import android.util.JsonReader;
 
 import com.alibaba.fastjson.JSON;
 import com.company.fyf.FyfApp;
@@ -21,6 +13,13 @@ import com.company.fyf.db.MemberSettingDao;
 import com.company.fyf.model.MemberSetting;
 import com.company.fyf.utils.CommConfig;
 import com.lyx.utils.CommUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class ApptoolServer extends AbstractHttpServer {
 	
@@ -183,6 +182,44 @@ public class ApptoolServer extends AbstractHttpServer {
 						back.onSuccess(null) ;
 					}
 					
+				} catch (JSONException e) {
+					e.printStackTrace();
+					showAnalyticalException(back);
+				}
+			}
+		});
+
+	}
+
+	public void rubbishSetting(final CallBack<String> back) {
+
+		rubbishSetting2(new CallBack<JSONObject>() {
+			@Override
+			public void onSuccess(JSONObject jsonObject) {
+				super.onSuccess(jsonObject);
+				try {
+					String rubbish_call_tel = jsonObject.getString("rubbish_call_tel") ;
+					String rubbish_call_price_picurl = jsonObject.getString("rubbish_call_price_picurl") ;
+					if(back != null){
+                        back.onSuccess(rubbish_call_tel + "$divide$" + rubbish_call_price_picurl) ;
+                    }
+				} catch (JSONException e) {
+					e.printStackTrace();
+					showAnalyticalException(back);
+				}
+			}
+		});
+	}
+
+	public void rubbishSetting2(final CallBack<JSONObject> back) {
+		addParam("act", "rubbish_setting");
+		doGet(new FilterAjaxCallBack(back) {
+			public void onSuccess(String data) {
+				try {
+					JSONObject jsonObject = new JSONObject(data);
+					if(back != null){
+						back.onSuccess(jsonObject) ;
+					}
 				} catch (JSONException e) {
 					e.printStackTrace();
 					showAnalyticalException(back);

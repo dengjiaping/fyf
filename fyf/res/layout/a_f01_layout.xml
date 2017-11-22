@@ -52,7 +52,7 @@
             android:background="@null"
             android:gravity="right"
             android:paddingRight="20dp"
-            android:text="@string/recovery_type_recoverable"
+            android:text="@string/recovery_type_order"
             android:textColor="@drawable/co_comm_simle_01" >
         </RadioButton>
     </RadioGroup>
